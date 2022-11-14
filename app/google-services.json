@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1080120166990",
+    "project_id": "infotasks-729a2",
+    "storage_bucket": "infotasks-729a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080120166990:android:2bc22b98058f1b0678911f",
+        "android_client_info": {
+          "package_name": "com.example.infotasks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080120166990-s005jej0tcab87umstsd6pb3cm0jc58j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.infotasks",
+            "certificate_hash": "dd84943dc22c5cbd7a9e8cc132469181fd212d79"
+          }
+        },
+        {
+          "client_id": "1080120166990-d4j3cnoprd5jhi9oahtov6gr96gsrre0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_l4VXZ0nUqvJ8mb3YELp0zGnMGgbiWrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080120166990-d4j3cnoprd5jhi9oahtov6gr96gsrre0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
