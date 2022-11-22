@@ -1,13 +1,17 @@
 package com.example.infotasks.Modelo
 
+import com.example.infotasks.Constantes.RolUsuario
+import java.io.Serializable
+
 data class Usuario(
-    var identificador: String? = null,
+    var mail: String? = null,
     var nombre: String? = null,
     var apellidos: String? = null,
-    var rol: String? = null, //Acministrador, Tecnico
-    var activo: Boolean = false)
+    var rol: RolUsuario? = null, //Acministrador, Tecnico
+    var activo: Boolean = false
+    ):Serializable
 {
     override fun toString(): String {
-        return "ID:${identificador}, Nombre:${nombre}, Apellidos:${apellidos}, Rol:${rol}, Activo:${activo}"
+        return "Mail:${mail}, Nombre:${nombre}, Apellidos:${apellidos}, Rol:${rol}, Activo:${activo}"
     }
 }

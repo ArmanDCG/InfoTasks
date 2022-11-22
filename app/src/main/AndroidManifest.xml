@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InfoTasks">
         <activity
+            android:name=".AdministradorActivity"
+            android:exported="false" />
+        <activity
             android:name=".Acceso"
             android:exported="true">
             <intent-filter>

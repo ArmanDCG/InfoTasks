@@ -1,6 +1,7 @@
 package com.example.salidadeportiva.ConexionBD
 
 import com.example.infotasks.Modelo.Usuario
+import com.example.infotasks.Utiles.ConversorQueryAModelo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -18,9 +19,9 @@ object FB {
 
 
     //--LOG---------------------------------------------------------------
-    suspend fun autenticar(email:String, pass:String):Boolean {
+    suspend fun autenticar(mail:String, pass:String):Boolean {
         return try {
-            auth.signInWithEmailAndPassword(email, pass).await()
+            auth.signInWithEmailAndPassword(mail, pass).await()
             true
         } catch (e: Exception){false}
     }
@@ -32,17 +33,17 @@ object FB {
         }catch (e:Exception){false}
     }
 
-    /*suspend fun obtenerUsuario(email: String): Usuario? {
+    suspend fun obtenerUsuario(mail: String): Usuario? {
         return try{
             val qUsuario= db.collection("usuarios")
-                .whereEqualTo("email", email)
+                .whereEqualTo("mail", mail)
                 .get()
                 .await()
-            Utiles.queryToUsuario(qUsuario.first())
+            ConversorQueryAModelo.queryAUsuario(qUsuario.first())
         }catch ( e:Exception){ null }
     }
 
-     */
+
     /*
     //--GET---------------------------------------------------------------
     suspend fun getUsuario(email: String): Usuario? {
