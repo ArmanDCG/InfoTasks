@@ -1,18 +1,25 @@
 package com.example.infotasks
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import com.example.infotasks.Modelo.Usuario
+import kotlinx.android.synthetic.main.activity_administrador.*
 
 
 class AdministradorActivity : AppCompatActivity() {
+    lateinit var usuario:Usuario
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_administrador)
 
-        var usuario=intent.getSerializableExtra("admin") as Usuario
-        var txtWelcome=findViewById<TextView>(R.id.txtWelcom)
-        txtWelcome.text=usuario.toString()
+
+        txtWelcom.text=usuario.toString()
+
+        btnTareas.setOnClickListener {
+            val intent= Intent(this, TareasActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

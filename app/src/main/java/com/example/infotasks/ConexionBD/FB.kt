@@ -1,5 +1,7 @@
 package com.example.salidadeportiva.ConexionBD
 
+import android.util.Log
+import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.Modelo.Usuario
 import com.example.infotasks.Utiles.ConversorQueryAModelo
 import com.google.firebase.auth.FirebaseAuth
@@ -41,6 +43,25 @@ object FB {
                 .await()
             ConversorQueryAModelo.queryAUsuario(qUsuario.first())
         }catch ( e:Exception){ null }
+    }
+
+    suspend fun añadirTarea(tarea: Tarea):Boolean{
+        return try {
+
+            db.collection("tareas")
+                .document(tarea.id!!)
+                .set(tarea)
+                .await()
+            true
+        }catch (e:Exception){false}
+    }
+
+
+
+
+
+    suspend fun obtenerIdTarea(): String {
+        return db.collection("usuarios").document().id
     }
 
 

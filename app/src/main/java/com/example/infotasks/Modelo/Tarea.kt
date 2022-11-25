@@ -12,6 +12,7 @@ data class Tarea(
     var prioridad: PrioridadTarea = PrioridadTarea.MEDIA, //Baja,Media,Alta
     var estado: EstadoTarea = EstadoTarea.PENDIENTE, //Pendiente,Pospuesta,Realizada
     var fecha: Date? = null,
+    var hora: Date? = null,
     var observaciones: String? = null,
     var cliente: Cliente? = null
 

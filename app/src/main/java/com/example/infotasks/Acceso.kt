@@ -20,8 +20,7 @@ import kotlinx.coroutines.runBlocking
 import kotlin.properties.Delegates
 
 class Acceso : AppCompatActivity() {
-
-    var accesoCorrecto = false
+    var credencialesCorrectas:Boolean = false
     var mail:String = ""
     var pass:String = ""
     var usuario:Usuario? = null
@@ -31,33 +30,33 @@ class Acceso : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acceso)
 
-        /*var btnAcceder = findViewById<Button>(R.id.btnAcceder)
-        var txtID = findViewById<TextView>(R.id.txtID)
-        var txtPass = findViewById<TextView>(R.id.txtPass)*/
+        txtID.setText("admin@infotasks.com")
+        txtPass.setText("administrador")
+
+        runBlocking {
+            val job: Job = launch(context = Dispatchers.Default) {
+                Log.e("id HJmwVyzkP2qQ34oGjyIx ", FB.obtenerIdTarea())
+            }
+            job.join()
+        }
 
         btnAcceder.setOnClickListener {
-            mail=txtID.text.toString().trim()
-            pass=txtPass.text.toString().trim()
-
-            if (!camposVacios()){
+            if (!camposVacios()) {
                 runBlocking {
-                    val job : Job = launch ( context = Dispatchers.Default){
-                        accesoCorrecto = FB.autenticar(mail, pass)
+                    val job: Job = launch(context = Dispatchers.Default) {
+                        credencialesCorrectas = FB.autenticar(mail, pass)
                     }
                     job.join()
                 }
-
-                if (!accesoCorrecto){
-                    toast(this@Acceso, "Credenciales incorrectas")
-                }else{
+                if (credencialesCorrectas) {
                     comprobarRol()
+                } else {
+                    toast(this, "Credenciales incorrectas")
                 }
 
-
-            }else
+            }else{
                 toast(this, "Todos los campos son obligatorios")
-
-
+            }
         }
 
 
@@ -72,6 +71,7 @@ class Acceso : AppCompatActivity() {
             }
             job.join()
         }
+
         if (usuario!!.rol == RolUsuario.ADMINISTRADOR )
             lanzarVentanaAdmin()
         else
@@ -91,7 +91,8 @@ class Acceso : AppCompatActivity() {
     }
 
     private fun camposVacios(): Boolean {
-
+        mail=txtID.text.toString().trim()
+        pass=txtPass.text.toString().trim()
         return (mail.isEmpty() || pass.isEmpty())
     }
 }
