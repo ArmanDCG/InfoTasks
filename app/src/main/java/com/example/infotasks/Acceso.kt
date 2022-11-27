@@ -1,22 +1,35 @@
 package com.example.infotasks
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import com.example.infotasks.Constantes.EstadoTarea
+import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Constantes.RolUsuario
+import com.example.infotasks.Constantes.TipoTarea
+import com.example.infotasks.Modelo.Cliente
+import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.Modelo.Usuario
 import com.example.infotasks.Utiles.Funcionales.toast
 import com.example.salidadeportiva.ConexionBD.FB
+import com.google.firebase.Timestamp
+import com.google.type.Date
 import kotlinx.android.synthetic.main.acceso.*
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.text.Format
+import java.text.SimpleDateFormat
+import java.time.*
+import java.time.format.DateTimeFormatter
 import kotlin.properties.Delegates
 
 class Acceso : AppCompatActivity() {
@@ -26,6 +39,8 @@ class Acceso : AppCompatActivity() {
     var usuario:Usuario? = null
 
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acceso)
@@ -33,13 +48,28 @@ class Acceso : AppCompatActivity() {
         txtID.setText("admin@infotasks.com")
         txtPass.setText("administrador")
 
+
+
+
+
+
+        var fechaHora =Instant.now().atZone(ZoneId.of("Europe/Madrid"))
+        var fecha=fechaHora.format(DateTimeFormatter.ofPattern("HH:mm"))
+        var hora = fechaHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+        Log.e("date", "$fecha - $hora")
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
-                Log.e("id HJmwVyzkP2qQ34oGjyIx ", FB.obtenerIdTarea())
+                FB.añadirTarea(Tarea(""))
             }
             job.join()
         }
+        runBlocking {
+            val job: Job = launch(context = Dispatchers.Default) {
 
+                Log.e("Tareas",FB.obtenerTareas().toString())
+            }
+            job.join()
+        }
         btnAcceder.setOnClickListener {
             if (!camposVacios()) {
                 runBlocking {
@@ -96,3 +126,5 @@ class Acceso : AppCompatActivity() {
         return (mail.isEmpty() || pass.isEmpty())
     }
 }
+
+

@@ -1,6 +1,7 @@
 package com.example.salidadeportiva.ConexionBD
 
 import android.util.Log
+import com.example.infotasks.Modelo.Cliente
 import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.Modelo.Usuario
 import com.example.infotasks.Utiles.ConversorQueryAModelo
@@ -20,7 +21,7 @@ object FB {
 
 
 
-    //--LOG---------------------------------------------------------------
+    //--Acceso---------------------------------------------------------------
     suspend fun autenticar(mail:String, pass:String):Boolean {
         return try {
             auth.signInWithEmailAndPassword(mail, pass).await()
@@ -35,6 +36,59 @@ object FB {
         }catch (e:Exception){false}
     }
 
+    //--Añadir--------------------------------------------------------------
+
+    suspend fun añadirTarea(tarea: Tarea):Boolean{
+        tarea.id= obtenerIdTarea()
+        return try {
+            db.collection("tareas")
+                .document(tarea.id!!)
+                .set(tarea)
+                .await()
+            true
+        }catch (ex:Exception){
+            Log.e("Error al insertar Tarea", ex.localizedMessage)
+            false}
+    }
+
+    suspend fun añadirCliente(cliente: Cliente):Boolean{
+        return try {
+            db.collection("clientes")
+                .document(cliente.dni!!)
+                .set(cliente)
+                .await()
+            true
+        }catch (ex:Exception){
+            Log.e("Error al insertarCLiente", ex.localizedMessage)
+            false
+        }
+    }
+
+    suspend fun añadirUsuario(usuario: Usuario):Boolean{
+        return try {
+            db.collection("usuarios")
+                .document(usuario.mail!!)
+                .set(usuario)
+                .await()
+            true
+        }catch (ex:Exception){
+            Log.e("Error al insertar Usuario", ex.localizedMessage)
+            false
+        }
+    }
+
+    //--Obtener---------------------------------------------------------------------
+    suspend fun obtenerTareas():ArrayList<Tarea>{
+        return try {
+           val query = db.collection("tareas")
+               .get()
+               .await()
+            ConversorQueryAModelo.queryATareas(query)
+        }catch (ex:Exception){
+            arrayListOf()
+        }
+    }
+
     suspend fun obtenerUsuario(mail: String): Usuario? {
         return try{
             val qUsuario= db.collection("usuarios")
@@ -45,24 +99,26 @@ object FB {
         }catch ( e:Exception){ null }
     }
 
-    suspend fun añadirTarea(tarea: Tarea):Boolean{
+    suspend fun obtenerCliente(dni: String): Cliente? {
         return try {
-
-            db.collection("tareas")
-                .document(tarea.id!!)
-                .set(tarea)
-                .await()
-            true
-        }catch (e:Exception){false}
+           val  qCliente = db.collection("clientes")
+               .whereEqualTo("dni", dni)
+               .get()
+               .await()
+            ConversorQueryAModelo.queryACliente(qCliente.first())
+        }catch (ex:Exception){
+            null
+        }
     }
 
 
 
 
 
-    suspend fun obtenerIdTarea(): String {
+     private fun obtenerIdTarea(): String {
         return db.collection("usuarios").document().id
     }
+
 
 
     /*

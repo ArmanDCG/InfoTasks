@@ -59,6 +59,9 @@ dependencies {
     //FireStore
     implementation 'com.google.firebase:firebase-firestore-ktx'
 
+    //Google Maps
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
 
 
     //Corrutinas
