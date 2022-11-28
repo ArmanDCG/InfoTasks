@@ -9,10 +9,14 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.infotasks.Constantes.EstadoTarea
+import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.R
+import com.example.infotasks.TareaActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -31,7 +35,7 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(contexto).inflate(R.layout.tareas_card,parent,false))
+        return ViewHolder(LayoutInflater.from(contexto).inflate(R.layout.card_view_tarea,parent,false))
 
     }
 
@@ -50,57 +54,50 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
         val txtHora=view.findViewById<TextView>(R.id.txtHoraEvento)
 
          */
+        val imgCardPrioridad=view.findViewById<ImageView>(R.id.imgCardPrioridad)
+        val txtCardTipo=view.findViewById<TextView>(R.id.txtCardTipo)
+        val txtCardEstado=view.findViewById<TextView>(R.id.txtCardEstado)
+        val txtCardFechCreacion=view.findViewById<TextView>(R.id.txtCardFechCreacion)
+        val txtCardUltimaMod= view.findViewById<TextView>(R.id.txtCardUltimaMod)
 
         @SuppressLint("ResourceAsColor", "NotifyDataSetChanged")
-        fun bind( tarea:Tarea, context: Context, pos:Int, AdaptadorEventos: AdaptadorTareas){
+        fun bind( tarea:Tarea, contexto: Context, pos:Int, AdaptadorEventos: AdaptadorTareas){
 
-            /*txtNombre.text = even.nombre
-            txtAsistentes.text = even.asistentes.size.toString()
-            txtFecha.text = even.fecha
-            txtHora.text = even.hora
-
-            when(even.estado){
-                "pendiente"-> txtEstado.append("Pendiente")
-                "activo"-> txtEstado.append("Activo")
-                else -> txtEstado.append("Realizado")
-            }
+            insertarImagenPrioridad(tarea.prioridad)
+            txtCardTipo.text = tarea.tipo.toString()
+            txtCardEstado.text = tarea.estado.toString()
+            pintarEstado(tarea.estado)
+            txtCardFechCreacion.text = txtCardFechCreacion.toString()
+            if(txtCardUltimaMod!=null)
+                txtCardUltimaMod.text = txtCardUltimaMod.toString()
 
             itemView.setOnClickListener {
-                val intentConsultaEvento=Intent(context, ConsultaEventoAdministrador::class.java)
-                IntentEvento.evento=even
-                context.startActivity(intentConsultaEvento)
+                val intentTarea=Intent(contexto, TareaActivity::class.java)
+                    .putExtra("tarea", tarea)
 
-            }
-
-            itemView.setOnLongClickListener {
-                val dialog=AlertDialog.Builder(context)
-                    .setMessage("¿Deseas borrar el Evento?\nSe borrarán todos los datos asociados permanentemente.")
-                    .setCancelable(false)
-                    .setTitle("Borrar")
-                    .setPositiveButton("Aceptar"){_,_ ->
-                        var borrado=false
-                        runBlocking {
-                            val job: Job = launch(context = Dispatchers.Default) {
-                               borrado=FB.borrarEvento(even.nombre)
-                            }
-                            job.join()
-                        }
-                        if (borrado){
-                            eventos.removeAt(pos)
-                            AdaptadorEventos.notifyDataSetChanged()
-                            Utiles.toast(context, "Borrado correctamente")
-                        }
-
-                    }.setNegativeButton("Cancelar"){_,_->}
-                    .create().show()
-                return@setOnLongClickListener true
+                contexto.startActivity(intentTarea)
             }
 
 
 
-             */
 
+        }
 
+        @SuppressLint("ResourceAsColor")
+        private fun pintarEstado(estado: EstadoTarea) {
+            if (estado == EstadoTarea.PENDIENTE){
+                txtCardEstado.setBackgroundColor(R.color.verde)
+            }else{
+                txtCardEstado.setBackgroundColor(R.color.gris)
+            }
+        }
+
+        private fun insertarImagenPrioridad(prioridad: PrioridadTarea) {
+            when(prioridad){
+                PrioridadTarea.ALTA -> imgCardPrioridad.setImageResource(R.drawable.flecha_prioridad_alta)
+                PrioridadTarea.MEDIA -> imgCardPrioridad.setImageResource(R.drawable.prioridad_media)
+                PrioridadTarea.BAJA -> imgCardPrioridad.setImageResource(R.drawable.flecha_prioridad_baja)
+            }
         }
 
 

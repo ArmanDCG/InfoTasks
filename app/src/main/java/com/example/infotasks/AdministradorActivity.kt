@@ -3,7 +3,6 @@ package com.example.infotasks
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import com.example.infotasks.Modelo.Usuario
 import kotlinx.android.synthetic.main.activity_administrador.*
 
@@ -18,7 +17,7 @@ class AdministradorActivity : AppCompatActivity() {
         txtWelcom.text=usuario.toString()
 
         btnTareas.setOnClickListener {
-            val intent= Intent(this, TareasActivity::class.java)
+            val intent= Intent(this, ListaTareasActivity::class.java)
             startActivity(intent)
         }
     }

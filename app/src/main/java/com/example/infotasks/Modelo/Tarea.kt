@@ -3,6 +3,7 @@ package com.example.infotasks.Modelo
 import com.example.infotasks.Constantes.EstadoTarea
 import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Constantes.TipoTarea
+import java.io.Serializable
 import java.util.*
 
 data class Tarea(
@@ -10,13 +11,13 @@ data class Tarea(
     var descripcion: String? = null,
     var tipo: TipoTarea? = null, //Instalación, Incidencia
     var prioridad: PrioridadTarea = PrioridadTarea.MEDIA, //Baja,Media,Alta
-    var estado: EstadoTarea = EstadoTarea.PENDIENTE, //Pendiente,Pospuesta,Realizada
+    var estado: EstadoTarea = EstadoTarea.PENDIENTE, //Pendiente,Realizada
     var fecha: String? = null,
     var hora: String? = null,
     var observaciones: String? = null,
     var idCliente: String? = null
 
-    )
+    ):Serializable
 
 {
     override fun toString(): String {

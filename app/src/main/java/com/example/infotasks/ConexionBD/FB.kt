@@ -116,7 +116,7 @@ object FB {
 
 
      private fun obtenerIdTarea(): String {
-        return db.collection("usuarios").document().id
+        return db.collection("tareas").document().id
     }
 
 

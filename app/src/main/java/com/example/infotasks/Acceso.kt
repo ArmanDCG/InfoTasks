@@ -1,6 +1,7 @@
 package com.example.infotasks
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,10 +27,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.lang.Exception
 import java.text.Format
 import java.text.SimpleDateFormat
 import java.time.*
 import java.time.format.DateTimeFormatter
+import java.util.*
 import kotlin.properties.Delegates
 
 class Acceso : AppCompatActivity() {
@@ -51,15 +54,14 @@ class Acceso : AppCompatActivity() {
 
 
 
-
-
         var fechaHora =Instant.now().atZone(ZoneId.of("Europe/Madrid"))
         var fecha=fechaHora.format(DateTimeFormatter.ofPattern("HH:mm"))
         var hora = fechaHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
         Log.e("date", "$fecha - $hora")
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
-                FB.añadirTarea(Tarea(""))
+                FB.añadirTarea(Tarea("", "no funciona internet", TipoTarea.INCIDENCIA, PrioridadTarea.ALTA, EstadoTarea.PENDIENTE, fecha, hora, "", "1"))
             }
             job.join()
         }
@@ -70,6 +72,17 @@ class Acceso : AppCompatActivity() {
             }
             job.join()
         }
+
+        try {
+            var dir= "Calle Tercia 1, Fuente el Fresno"
+            var map = "http://maps.google.co.in/maps?q=$dir"
+            var intentMap:Intent= Intent(Intent.ACTION_VIEW, Uri.parse(map))
+            startActivity(intentMap)
+        }catch (e:Exception){
+            Log.e("NO se pudo abrir maps", e.stackTraceToString())
+        }
+
+
         btnAcceder.setOnClickListener {
             if (!camposVacios()) {
                 runBlocking {

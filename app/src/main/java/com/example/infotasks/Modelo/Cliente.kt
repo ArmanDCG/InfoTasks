@@ -1,6 +1,7 @@
 package com.example.infotasks.Modelo
 
 import com.google.android.gms.maps.model.LatLng
+import java.io.Serializable
 
 
 data class Cliente(
@@ -8,12 +9,13 @@ data class Cliente(
     var nombre: String? = null,
     var apellidos: String? = null,
     var telefono: String? = null,
-    var direccion: String? = null,
-    var latlng: LatLng? = null
+    var localidad: String? = null,
+    var direccion: String? = null
 
-    )
+
+    ):Serializable
 {
     override fun toString(): String {
-        return "ID:${dni}, Nombre:${nombre}, Apellidos:${apellidos}, Telefono:${telefono}, Dirección:${direccion}, LatLng:${latlng}"
+        return "ID:${dni}, Nombre:${nombre}, Apellidos:${apellidos}, Telefono:${telefono}, Dirección:${"$localidad, $direccion"}"
     }
 }
