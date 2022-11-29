@@ -89,6 +89,20 @@ object FB {
         }
     }
 
+    suspend fun obtenerClientes():ArrayList<Cliente>{
+        return try {
+            val query=db.collection("clientes")
+                .orderBy("apellidos")
+                .orderBy("nombre")
+                .get()
+                .await()
+            ConversorQueryAModelo.queryAClientes(query)
+        }catch (ex:Exception){
+            Log.e("Error al obtener clientes", ex.localizedMessage)
+            arrayListOf()
+        }
+    }
+
     suspend fun obtenerUsuario(mail: String): Usuario? {
         return try{
             val qUsuario= db.collection("usuarios")

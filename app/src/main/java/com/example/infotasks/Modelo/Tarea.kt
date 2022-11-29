@@ -10,16 +10,20 @@ data class Tarea(
     var id: String? = null,
     var descripcion: String? = null,
     var tipo: TipoTarea? = null, //Instalación, Incidencia
-    var prioridad: PrioridadTarea = PrioridadTarea.MEDIA, //Baja,Media,Alta
+    var prioridad: PrioridadTarea? = null, //Baja,Media,Alta
     var estado: EstadoTarea = EstadoTarea.PENDIENTE, //Pendiente,Realizada
+    var observaciones: String? = null,
     var fecha: String? = null,
     var hora: String? = null,
-    var observaciones: String? = null,
     var idCliente: String? = null
 
     ):Serializable
 
 {
+    //Por defecto
+
+
+
     override fun toString(): String {
         return "ID:${id}, Descripción:${descripcion}, Tipo:${tipo}, Prioridad:${prioridad}, Estado:${estado}, Fecha:${fecha}, Observaciones:${observaciones}"
     }

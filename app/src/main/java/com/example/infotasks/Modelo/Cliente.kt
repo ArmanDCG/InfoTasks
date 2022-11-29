@@ -10,12 +10,12 @@ data class Cliente(
     var apellidos: String? = null,
     var telefono: String? = null,
     var localidad: String? = null,
-    var direccion: String? = null
+    var domicilio: String? = null
 
 
     ):Serializable
 {
     override fun toString(): String {
-        return "ID:${dni}, Nombre:${nombre}, Apellidos:${apellidos}, Telefono:${telefono}, Dirección:${"$localidad, $direccion"}"
+        return "ID:${dni}, Nombre:${nombre}, Apellidos:${apellidos}, Telefono:${telefono}, Dirección:${"$localidad, $domicilio"}"
     }
 }

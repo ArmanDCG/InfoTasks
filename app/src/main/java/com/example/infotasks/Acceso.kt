@@ -6,21 +6,15 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.infotasks.Constantes.EstadoTarea
 import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Constantes.RolUsuario
 import com.example.infotasks.Constantes.TipoTarea
-import com.example.infotasks.Modelo.Cliente
 import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.Modelo.Usuario
 import com.example.infotasks.Utiles.Funcionales.toast
 import com.example.salidadeportiva.ConexionBD.FB
-import com.google.firebase.Timestamp
-import com.google.type.Date
 import kotlinx.android.synthetic.main.acceso.*
 
 import kotlinx.coroutines.Dispatchers
@@ -28,12 +22,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.lang.Exception
-import java.text.Format
-import java.text.SimpleDateFormat
 import java.time.*
 import java.time.format.DateTimeFormatter
-import java.util.*
-import kotlin.properties.Delegates
 
 class Acceso : AppCompatActivity() {
     var credencialesCorrectas:Boolean = false

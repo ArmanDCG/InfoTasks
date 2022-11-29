@@ -1,5 +1,6 @@
 package com.example.infotasks
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +27,11 @@ class ListaTareasActivity : AppCompatActivity() {
             job.join()
         }
         lanzarAdaptador()
+
+        btnAñadirTarea.setOnClickListener{
+            val intentCrearTarea= Intent(this, CrearTareaActivity::class.java )
+            startActivity(intentCrearTarea)
+        }
     }
 
     private fun lanzarAdaptador(){

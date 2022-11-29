@@ -13,4 +13,21 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Mis Estilos -->
+    <style name="btn">
+        <item name="android:textSize">40dp</item>
+    </style>
+    <style name="textoCrear">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textoError">
+        <item name="android:textSize">10dp</item>
+        <item name="android:text">"*Campo Obligatorio"</item>
+        <item name="android:textColor">@color/rojoError</item>
+        <item name="android:visible">false</item>
+    </style>
 </resources>

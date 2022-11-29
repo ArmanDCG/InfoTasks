@@ -32,6 +32,7 @@ object ConversorQueryAModelo {
     }
 
     fun queryATareas(dato: QuerySnapshot?):ArrayList<Tarea> {
+        var tarea:Tarea
         var tareas= arrayListOf<Tarea>()
         for(dc: DocumentChange in dato?.documentChanges!!) {
             if (dc.type == DocumentChange.Type.ADDED) {
@@ -56,7 +57,16 @@ object ConversorQueryAModelo {
             }
         }
         return tareas
+    }
 
+    fun queryAClientes(dato: QuerySnapshot?): ArrayList<Cliente> {
+        var clientes = arrayListOf<Cliente>()
+        for (dc:DocumentChange in dato?.documentChanges!!){
+            if (dc.type==DocumentChange.Type.ADDED){
+                clientes.add(queryACliente(dc.document)!!)
+            }
+        }
+        return clientes
     }
 
      fun queryACliente(dato: QueryDocumentSnapshot?): Cliente? {
@@ -65,13 +75,14 @@ object ConversorQueryAModelo {
             dato["nombre"].toString(),
             dato["apellidos"].toString(),
             dato["telefono"].toString(),
-            dato["direccion"].toString(),
-            estraerLatLng(dato["latlng"] as HashMap<String, Double>),
+            dato["localidad"].toString(),
+            dato["domicilio"].toString(),
+
 
         )
     }
 
-    private fun estraerLatLng(hmd: HashMap<String, Double>): LatLng? {
-        return LatLng(hmd["latitude"]!!.toDouble(), hmd["latitude"]!!.toDouble())
-    }
+
+
+
 }
