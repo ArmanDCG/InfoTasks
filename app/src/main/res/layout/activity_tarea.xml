@@ -1,9 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TareaActivity">
+    tools:context=".TareaActivity"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="548dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:background="@color/azulBackGround"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/txtVistaTipoTarea"
+                    style="@style/textoIdentificarElemento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Tipo"
+                    android:textSize="35dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prioridad:" />
+
+                    <TextView
+                        android:id="@+id/txtVistaPrioridadTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="prioridad"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Estado:" />
+
+                    <TextView
+                        android:id="@+id/txtVistaEstadoTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="estado"
+                        android:textSize="16dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha Creación:" />
+
+                    <TextView
+                        android:id="@+id/txtFechaCreacionTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="fecha"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha Última Modificación:" />
+
+                    <TextView
+                        android:id="@+id/txtFechaUltimaModTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="fecha"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/textoIdentificarElemento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="10dp"
+                    android:text="Descripción:" />
+
+                <TextView
+                    android:id="@+id/txtVistaDescTarea"
+                    android:layout_width="match_parent"
+                    android:layout_height="132dp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:paddingLeft="3dp"
+                    android:text="texto,texto,texto,texto"
+                    android:textSize="16dp" />
+
+                <TextView
+                    style="@style/textoIdentificarElemento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="10dp"
+                    android:text="Observaciónes de Tecnicos encargados:" />
+
+                <TextView
+                    android:id="@+id/txtVistaObservacionesTarea"
+                    android:layout_width="match_parent"
+                    android:layout_height="132dp"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:paddingLeft="3dp"
+                    android:text="texto,texto,texto,texto"
+                    android:textSize="16dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="371dp"
+                android:layout_weight="1"
+                android:background="@color/cremaBackGround"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    style="@style/textoIdentificarElemento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Cliente"
+                    android:textSize="35dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DNI:" />
+
+                    <TextView
+                        android:id="@+id/txtVistaDniCliTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="dni"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre:" />
+
+                    <TextView
+                        android:id="@+id/txtVistaNombreCliTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="nombre"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apellidos:" />
+
+                    <TextView
+                        android:id="@+id/txtVistaApellidosCliTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="apellidos"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Teléfono:" />
+
+                    <TextView
+                        android:id="@+id/txtVistaTlfCliTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="telefono"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Localidad:" />
+
+                    <TextView
+                        android:id="@+id/txtVistaLocalidadCliTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="localidad"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Domicilio:" />
+
+                    <TextView
+                        android:id="@+id/txtVistaDomicilioCliTarea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="domicilio"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnAbrirGoogleMaps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:text="Ver dirección en Google Maps" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

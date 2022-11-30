@@ -20,6 +20,14 @@ class ListaTareasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tareas)
 
+        btnAñadirTarea.setOnClickListener{
+            val intentCrearTarea= Intent(this, CrearTareaActivity::class.java )
+            startActivity(intentCrearTarea)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
                 tareas = FB.obtenerTareas()
@@ -27,11 +35,6 @@ class ListaTareasActivity : AppCompatActivity() {
             job.join()
         }
         lanzarAdaptador()
-
-        btnAñadirTarea.setOnClickListener{
-            val intentCrearTarea= Intent(this, CrearTareaActivity::class.java )
-            startActivity(intentCrearTarea)
-        }
     }
 
     private fun lanzarAdaptador(){

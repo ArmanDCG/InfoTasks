@@ -63,14 +63,7 @@ class Acceso : AppCompatActivity() {
             job.join()
         }
 
-        try {
-            var dir= "Calle Tercia 1, Fuente el Fresno"
-            var map = "http://maps.google.co.in/maps?q=$dir"
-            var intentMap:Intent= Intent(Intent.ACTION_VIEW, Uri.parse(map))
-            startActivity(intentMap)
-        }catch (e:Exception){
-            Log.e("NO se pudo abrir maps", e.stackTraceToString())
-        }
+
 
 
         btnAcceder.setOnClickListener {

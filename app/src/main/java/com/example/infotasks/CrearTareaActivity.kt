@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
@@ -87,8 +89,6 @@ class CrearTareaActivity : AppCompatActivity() {
         }
 
         btnCrearTarea.setOnClickListener {
-
-
             if(obtenerDatos()){
                 var nuevaTarea=Tarea().let {
                     it.descripcion=descripcion
@@ -107,8 +107,10 @@ class CrearTareaActivity : AppCompatActivity() {
                 job.join()
                 }
             }
-            }
         }
+
+        btnCancelarCrearTarea.setOnClickListener{finish()}
+    }
 
     private fun obtenerDatos(): Boolean {
         var correcto=true
@@ -121,7 +123,7 @@ class CrearTareaActivity : AppCompatActivity() {
     }
 
     private fun pintar(txtError: TextView?) {
-        txtError!!.isVisible=true
+        txtError!!.visibility= View.VISIBLE
     }
 
     override fun onStart() {

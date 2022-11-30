@@ -133,7 +133,20 @@ object FB {
         return db.collection("tareas").document().id
     }
 
+    //--Borrar---------------------------------------------------------------
 
+    suspend fun borrarTarea(idTarea:String):Boolean{
+        return try {
+            db.collection("tareas")
+                .document(idTarea)
+                .delete()
+                .await()
+            true
+        }catch (ex:Exception){
+            Log.e("NO se pudo borrar la tarea", ex.localizedMessage)
+            false
+        }
+    }
 
     /*
     //--GET---------------------------------------------------------------

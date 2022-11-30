@@ -4,7 +4,7 @@ import com.example.infotasks.Constantes.RolUsuario
 import java.io.Serializable
 
 data class Usuario(
-    var mail: String? = null,
+    var mail: String? = null, //ID
     var nombre: String? = null,
     var apellidos: String? = null,
     var rol: RolUsuario? = null, //Acministrador, Tecnico
