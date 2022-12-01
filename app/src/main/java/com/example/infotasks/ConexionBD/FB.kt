@@ -129,7 +129,7 @@ object FB {
 
 
 
-     private fun obtenerIdTarea(): String {
+    fun obtenerIdTarea(): String {
         return db.collection("tareas").document().id
     }
 

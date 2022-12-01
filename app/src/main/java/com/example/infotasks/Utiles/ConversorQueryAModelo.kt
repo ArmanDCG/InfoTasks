@@ -15,6 +15,8 @@ import com.google.firebase.firestore.QuerySnapshot
 
 
 import com.google.type.LatLngOrBuilder
+import java.util.*
+import kotlin.collections.ArrayList
 
 object ConversorQueryAModelo {
 
@@ -44,11 +46,10 @@ object ConversorQueryAModelo {
                         TipoTarea.valueOf(dc.document.get("tipo").toString()),
                         PrioridadTarea.valueOf(dc.document.get("prioridad").toString()),
                         EstadoTarea.valueOf(dc.document.get("estado").toString()),
-                        dc.document.get("fecha").toString(),
-                        dc.document.get("hora").toString(),
                         dc.document.get("observaciones").toString(),
-                        dc.document.get("idCliente").toString()
-
+                        dc.document.get("fechaCreacion") as Date,
+                        dc.document.get("fechaUltimaMod") as Date,
+                        dc.document.get("idCliente").toString(),
                     )
                 )
                 Log.e("Tarea desglosada", tareas.last().toString())

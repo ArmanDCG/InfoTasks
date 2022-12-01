@@ -1,7 +1,6 @@
 package com.example.infotasks
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,23 +12,27 @@ import com.example.infotasks.Constantes.RolUsuario
 import com.example.infotasks.Constantes.TipoTarea
 import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.Modelo.Usuario
+import com.example.infotasks.Utiles.FechaHora
 import com.example.infotasks.Utiles.Funcionales.toast
 import com.example.salidadeportiva.ConexionBD.FB
+import com.google.firebase.Timestamp
 import kotlinx.android.synthetic.main.acceso.*
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.lang.Exception
+import java.text.SimpleDateFormat
 import java.time.*
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class Acceso : AppCompatActivity() {
     var credencialesCorrectas:Boolean = false
     var mail:String = ""
     var pass:String = ""
     var usuario:Usuario? = null
+
 
 
 
@@ -42,16 +45,9 @@ class Acceso : AppCompatActivity() {
         txtPass.setText("administrador")
 
 
-
-
-        var fechaHora =Instant.now().atZone(ZoneId.of("Europe/Madrid"))
-        var fecha=fechaHora.format(DateTimeFormatter.ofPattern("HH:mm"))
-        var hora = fechaHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-
-        Log.e("date", "$fecha - $hora")
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
-                FB.añadirTarea(Tarea("", "no funciona internet", TipoTarea.INCIDENCIA, PrioridadTarea.ALTA, EstadoTarea.PENDIENTE, fecha, hora, "", "1"))
+                FB.añadirTarea(Tarea(null, "Router Roto", TipoTarea.INCIDENCIA, PrioridadTarea.ALTA, EstadoTarea.PENDIENTE,null, FechaHora.obtenerFechaActual(), FechaHora.obtenerFechaActual(), ""))
             }
             job.join()
         }
@@ -111,7 +107,7 @@ class Acceso : AppCompatActivity() {
     }
 
     private fun lanzarVentanaAdmin() {
-        val intentAdmin= Intent(this, AdministradorActivity::class.java)
+        val intentAdmin= Intent(this, Administrador::class.java)
         intentAdmin.putExtra("admin", usuario)
         startActivity(intentAdmin)
     }

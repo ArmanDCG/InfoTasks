@@ -13,7 +13,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class ListaTareasActivity : AppCompatActivity() {
+class ListaTareas : AppCompatActivity() {
     private lateinit var adaptadorTareas:AdaptadorTareas
     private lateinit var tareas:ArrayList<Tarea>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,7 @@ class ListaTareasActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tareas)
 
         btnAñadirTarea.setOnClickListener{
-            val intentCrearTarea= Intent(this, CrearTareaActivity::class.java )
+            val intentCrearTarea= Intent(this, CrearTarea::class.java )
             startActivity(intentCrearTarea)
         }
     }

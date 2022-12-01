@@ -6,6 +6,7 @@ import com.example.infotasks.Constantes.TipoTarea
 import java.io.Serializable
 import java.util.*
 
+
 data class Tarea(
     var id: String? = null,
     var descripcion: String? = null,
@@ -13,11 +14,9 @@ data class Tarea(
     var prioridad: PrioridadTarea? = null, //Baja,Media,Alta
     var estado: EstadoTarea = EstadoTarea.PENDIENTE, //Pendiente,Realizada
     var observaciones: String? = null,
-    var fechaHoraCreacion: String? = null,
-    var fechaHoraUltimaMod: String? = null,
-    var idCliente: String? = null,
-    var idUsuario: String? = null
-
+    var fechaCreacion: Date? = null,
+    var fechaUltimaMod: Date? = null,
+    var idCliente: String? = null
     ):Serializable
 
 {
@@ -26,6 +25,6 @@ data class Tarea(
 
 
     override fun toString(): String {
-        return "ID:${id}, Descripción:${descripcion}, Tipo:${tipo}, Prioridad:${prioridad}, Estado:${estado}, Fecha/Hora Creación:${fechaHoraCreacion}, Fecha/Hora Última Modificación:${fechaHoraUltimaMod} Observaciones:${observaciones}"
+        return "ID:${id}, Descripción:${descripcion}, Tipo:${tipo}, Prioridad:${prioridad}, Estado:${estado}, Fecha/Hora Creación:${fechaCreacion}, Fecha/Hora Última Modificación:${fechaUltimaMod} Observaciones:${observaciones}, IdCliente:${idCliente}"
     }
 }

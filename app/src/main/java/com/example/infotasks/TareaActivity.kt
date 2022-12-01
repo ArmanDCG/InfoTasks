@@ -24,8 +24,22 @@ class TareaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tarea)
 
+        obtenerFunteDatos()
+        mostrarDatos()
 
+        btnAbrirGoogleMaps.setOnClickListener {
+            try {
+                var dir= "${cliente.domicilio}, ${cliente.localidad}"
+                var map = "http://maps.google.co.in/maps?q=$dir"
+                var intentMap = Intent(Intent.ACTION_VIEW, Uri.parse(map))
+                startActivity(intentMap)
+            }catch (e: Exception){
+                Log.e("NO se pudo abrir maps", e.stackTraceToString())
+            }
+        }
+    }
 
+    private fun obtenerFunteDatos() {
         tarea=intent.getSerializableExtra("tarea") as Tarea
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
@@ -33,21 +47,7 @@ class TareaActivity : AppCompatActivity() {
             }
             job.join()
         }
-
-        mostrarDatos()
-
-
-                btnAbrirGoogleMaps.setOnClickListener {
-                    try {
-                        var dir= "${cliente.domicilio}, ${cliente.localidad}"
-                        var map = "http://maps.google.co.in/maps?q=$dir"
-                        var intentMap = Intent(Intent.ACTION_VIEW, Uri.parse(map))
-                        startActivity(intentMap)
-                    }catch (e: Exception){
-                        Log.e("NO se pudo abrir maps", e.stackTraceToString())
-                    }
-                }
-            }
+    }
 
     private fun mostrarDatos() {
         //Tarea

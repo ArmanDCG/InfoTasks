@@ -17,12 +17,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="548dp"
+                android:layout_height="558dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:background="@color/azulBackGround"
-                android:orientation="vertical"
-                android:padding="5dp">
+                android:background="@drawable/forma_vista_tarea_linear_layout"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtVistaTipoTarea"
@@ -166,9 +165,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="371dp"
                 android:layout_weight="1"
-                android:background="@color/cremaBackGround"
+
                 android:orientation="vertical"
-                android:padding="5dp">
+                android:background="@drawable/forma_vista_cliente_linear_layout">
 
                 <TextView
                     style="@style/textoIdentificarElemento"

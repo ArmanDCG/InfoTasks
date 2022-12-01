@@ -1,6 +1,7 @@
 package com.example.infotasks
 
 import android.annotation.SuppressLint
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,11 +10,13 @@ import android.view.View.VISIBLE
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Constantes.TipoTarea
 import com.example.infotasks.Modelo.Cliente
 import com.example.infotasks.Modelo.Tarea
+import com.example.infotasks.Utiles.FechaHora
 import com.example.salidadeportiva.ConexionBD.FB
 import kotlinx.android.synthetic.main.activity_crear_tarea.*
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +24,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class CrearTareaActivity : AppCompatActivity() {
+class CrearTarea : AppCompatActivity() {
 
     private lateinit var descripcion:String
     private lateinit var tipo:TipoTarea
@@ -40,6 +43,7 @@ class CrearTareaActivity : AppCompatActivity() {
 
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,8 +99,9 @@ class CrearTareaActivity : AppCompatActivity() {
                     it.tipo=tipo
                     it.prioridad=prioridad
                     it.idCliente=dniCliente
-                    it.fecha=""
-                    it.hora=""
+                    it.fechaCreacion=FechaHora.obtenerFechaActual()
+                    it.fechaUltimaMod=FechaHora.obtenerFechaActual()
+
                 } as Tarea
                 runBlocking {
                     val job: Job = launch(context = Dispatchers.Default) {

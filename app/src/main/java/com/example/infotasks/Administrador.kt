@@ -7,7 +7,7 @@ import com.example.infotasks.Modelo.Usuario
 import kotlinx.android.synthetic.main.activity_administrador.*
 
 
-class AdministradorActivity : AppCompatActivity() {
+class Administrador : AppCompatActivity() {
     lateinit var usuario:Usuario
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +17,7 @@ class AdministradorActivity : AppCompatActivity() {
         txtWelcom.text=usuario.toString()
 
         btnTareas.setOnClickListener {
-            val intent= Intent(this, ListaTareasActivity::class.java)
+            val intent= Intent(this, ListaTareas::class.java)
             startActivity(intent)
         }
     }

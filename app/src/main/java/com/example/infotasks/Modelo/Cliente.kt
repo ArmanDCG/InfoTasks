@@ -1,6 +1,5 @@
 package com.example.infotasks.Modelo
 
-import com.google.android.gms.maps.model.LatLng
 import java.io.Serializable
 
 

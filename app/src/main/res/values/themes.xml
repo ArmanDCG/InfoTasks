@@ -24,6 +24,11 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="textoInput">
+        <item name="android:textSize">16dp</item>
+        <item name="android:inputType">text</item>
+    </style>
+
     <style name="textoError">
         <item name="android:textSize">10dp</item>
         <item name="android:text">"*Campo Obligatorio"</item>

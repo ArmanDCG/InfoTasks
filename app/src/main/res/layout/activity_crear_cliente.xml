@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CrearCliente"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:text="Nuevo Cliente"
+        android:layout_gravity="top|center_horizontal"
+        style="@style/textoIdentificarElemento"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            style="@style/textoIdentificarElemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DNI:" />
+        <TextView
+            android:id="@+id/txtCrearDniCliente"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            style="@style/textoInput"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            style="@style/textoIdentificarElemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre:" />
+        <TextView
+            android:id="@+id/txtCrearNombreCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/textoInput"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            style="@style/textoIdentificarElemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apellidos:" />
+        <TextView
+            android:id="@+id/txtCrearApellidosCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/textoInput"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            style="@style/textoIdentificarElemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Telefono:" />
+        <TextView
+            android:id="@+id/txtCrearTlfCliente"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            style="@style/textoInput"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            style="@style/textoIdentificarElemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Localidad:" />
+        <TextView
+            android:id="@+id/txtCrearLocalidadCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/textoInput"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            style="@style/textoIdentificarElemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Domicilio:" />
+        <TextView
+            android:id="@+id/txtCrearCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/textoInput"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:id="@+id/btnCancelarCrearCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="100dp"/>
+        <Button
+            android:id="@+id/btnCrearCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Crear" />
+    </LinearLayout>
+
+</LinearLayout>
