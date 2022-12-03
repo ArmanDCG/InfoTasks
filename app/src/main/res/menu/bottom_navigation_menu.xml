@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_tareas"
+        android:enabled="true"
+        android:title="Tareas"
+        android:icon="@drawable/icono_tareas_menu"
+        />
+    <item
+        android:id="@+id/item_tecnicos"
+        android:enabled="true"
+        android:title="Tecnicos"
+        android:icon="@drawable/icono_tecnicos_menu"
+        />
+    <item
+        android:id="@+id/item_clientes"
+        android:enabled="true"
+        android:title="Clientes"
+        android:icon="@drawable/icono_clientes_menu"
+        />
+</menu>

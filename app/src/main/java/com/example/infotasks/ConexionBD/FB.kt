@@ -1,6 +1,8 @@
 package com.example.salidadeportiva.ConexionBD
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.example.infotasks.Modelo.Cliente
 import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.Modelo.Usuario
@@ -78,6 +80,7 @@ object FB {
     }
 
     //--Obtener---------------------------------------------------------------------
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun obtenerTareas():ArrayList<Tarea>{
         return try {
            val query = db.collection("tareas")
@@ -85,6 +88,7 @@ object FB {
                .await()
             ConversorQueryAModelo.queryATareas(query)
         }catch (ex:Exception){
+            Log.e("ERROR, al extraer tareas", ex.localizedMessage)
             arrayListOf()
         }
     }
@@ -93,7 +97,7 @@ object FB {
         return try {
             val query=db.collection("clientes")
                 .orderBy("apellidos")
-                .orderBy("nombre")
+                //.orderBy("nombre")
                 .get()
                 .await()
             ConversorQueryAModelo.queryAClientes(query)

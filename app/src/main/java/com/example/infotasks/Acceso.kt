@@ -45,12 +45,12 @@ class Acceso : AppCompatActivity() {
         txtPass.setText("administrador")
 
 
-        runBlocking {
+        /*runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
-                FB.añadirTarea(Tarea(null, "Router Roto", TipoTarea.INCIDENCIA, PrioridadTarea.ALTA, EstadoTarea.PENDIENTE,null, FechaHora.obtenerFechaActual(), FechaHora.obtenerFechaActual(), ""))
+                FB.añadirTarea(Tarea(null, "Router Roto otra vez", TipoTarea.INCIDENCIA, PrioridadTarea.ALTA, EstadoTarea.PENDIENTE,null, FechaHora.obtenerFechaActual(), FechaHora.obtenerFechaActual(), ""))
             }
             job.join()
-        }
+        }*/
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
 

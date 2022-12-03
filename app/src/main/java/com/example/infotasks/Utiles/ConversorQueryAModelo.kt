@@ -1,6 +1,8 @@
 package com.example.infotasks.Utiles
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.example.infotasks.Constantes.EstadoTarea
 import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Constantes.RolUsuario
@@ -33,12 +35,12 @@ object ConversorQueryAModelo {
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun queryATareas(dato: QuerySnapshot?):ArrayList<Tarea> {
         var tarea:Tarea
         var tareas= arrayListOf<Tarea>()
         for(dc: DocumentChange in dato?.documentChanges!!) {
             if (dc.type == DocumentChange.Type.ADDED) {
-                Log.e("Nueva tarea", dc.document.toString())
                 tareas.add(
                     Tarea(
                         dc.document.get("id").toString(),
@@ -47,8 +49,8 @@ object ConversorQueryAModelo {
                         PrioridadTarea.valueOf(dc.document.get("prioridad").toString()),
                         EstadoTarea.valueOf(dc.document.get("estado").toString()),
                         dc.document.get("observaciones").toString(),
-                        dc.document.get("fechaCreacion") as Date,
-                        dc.document.get("fechaUltimaMod") as Date,
+                        dc.document.getTimestamp("fechaCreacion")!!.toDate(),
+                        dc.document.getTimestamp("fechaUltimaMod")!!.toDate(),
                         dc.document.get("idCliente").toString(),
                     )
                 )

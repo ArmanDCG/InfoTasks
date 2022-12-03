@@ -4,17 +4,21 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infotasks.Constantes.EstadoTarea
 import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.R
 import com.example.infotasks.TareaActivity
+import com.example.infotasks.Utiles.FechaHora
+import com.example.infotasks.Utiles.FechaHora.dateToString
 import com.example.infotasks.Utiles.Funcionales.toast
 import com.example.salidadeportiva.ConexionBD.FB
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +43,7 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val tarea = this.tareas[position]
@@ -52,16 +57,16 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
         val txtCardFechCreacion=view.findViewById<TextView>(R.id.txtCardFechCreacion)
         val txtCardUltimaMod= view.findViewById<TextView>(R.id.txtCardUltimaMod)
 
+        @RequiresApi(Build.VERSION_CODES.O)
         @SuppressLint("ResourceAsColor", "NotifyDataSetChanged")
         fun bind( tarea:Tarea, listaTareas:ArrayList<Tarea>, contexto: Context, pos:Int, AdaptadorEventos: AdaptadorTareas){
 
             insertarImagenPrioridad(tarea.prioridad!!)
             txtCardTipo.text = tarea.tipo.toString()
             txtCardEstado.text = tarea.estado.toString()
-            pintarEstado(tarea.estado)
-            txtCardFechCreacion.text = txtCardFechCreacion.toString()
-            if(txtCardUltimaMod!=null)
-                txtCardUltimaMod.text = txtCardUltimaMod.toString()
+            pintarEstado(contexto, tarea.estado)
+            txtCardFechCreacion.text = dateToString(tarea.fechaCreacion!!)
+            txtCardUltimaMod.text = dateToString(tarea.fechaUltimaMod!!)
 
             itemView.setOnClickListener {
                 val intentTarea=Intent(contexto, TareaActivity::class.java)
@@ -100,11 +105,11 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
         }
 
         @SuppressLint("ResourceAsColor")
-        private fun pintarEstado(estado: EstadoTarea) {
+        private fun pintarEstado(contexto:Context, estado: EstadoTarea) {
             if (estado == EstadoTarea.PENDIENTE){
-                txtCardEstado.setBackgroundColor(R.color.verde)
+                txtCardEstado.setBackgroundColor(contexto.getColor(R.color.verde))
             }else{
-                txtCardEstado.setBackgroundColor(R.color.gris)
+                txtCardEstado.setBackgroundColor(contexto.getColor(R.color.gris))
             }
         }
 

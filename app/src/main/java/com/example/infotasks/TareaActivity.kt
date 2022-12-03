@@ -18,7 +18,7 @@ import java.lang.Exception
 class TareaActivity : AppCompatActivity() {
 
     private lateinit var tarea: Tarea
-    private lateinit var cliente: Cliente
+    private  lateinit var cliente: Cliente
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -49,6 +49,8 @@ class CrearTarea : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_tarea)
 
+        cargarListaClientes()
+
 
         spinnerCliente.adapter=ArrayAdapter(this, R.id.txtItem, listaClientes )
         spinnerCliente.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
@@ -131,14 +133,18 @@ class CrearTarea : AppCompatActivity() {
         txtError!!.visibility= View.VISIBLE
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun cargarListaClientes(){
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
                 listaClientes = FB.obtenerClientes()
             }
             job.join()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        cargarListaClientes()
 
     }
 }
