@@ -17,7 +17,6 @@ import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.R
 import com.example.infotasks.TareaActivity
-import com.example.infotasks.Utiles.FechaHora
 import com.example.infotasks.Utiles.FechaHora.dateToString
 import com.example.infotasks.Utiles.Funcionales.toast
 import com.example.salidadeportiva.ConexionBD.FB
@@ -115,9 +114,9 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
 
         private fun insertarImagenPrioridad(prioridad: PrioridadTarea) {
             when(prioridad){
-                PrioridadTarea.ALTA -> imgCardPrioridad.setImageResource(R.drawable.flecha_prioridad_alta)
+                PrioridadTarea.ALTA -> imgCardPrioridad.setImageResource(R.drawable.prioridad_alta)
                 PrioridadTarea.MEDIA -> imgCardPrioridad.setImageResource(R.drawable.prioridad_media)
-                PrioridadTarea.BAJA -> imgCardPrioridad.setImageResource(R.drawable.flecha_prioridad_baja)
+                PrioridadTarea.BAJA -> imgCardPrioridad.setImageResource(R.drawable.prioridad_baja)
             }
         }
 

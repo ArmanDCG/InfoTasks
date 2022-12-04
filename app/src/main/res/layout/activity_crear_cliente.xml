@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
         <TextView
             style="@style/textoIdentificarElemento"
             android:layout_width="wrap_content"
@@ -34,11 +34,16 @@
             android:layout_height="wrap_content"
             style="@style/textoInput"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/txtErrorDni"
+        style="@style/textoError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
         <TextView
             style="@style/textoIdentificarElemento"
             android:layout_width="wrap_content"
@@ -50,11 +55,16 @@
             android:layout_height="wrap_content"
             style="@style/textoInput"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/txtErrorNombre"
+        style="@style/textoError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
         <TextView
             style="@style/textoIdentificarElemento"
             android:layout_width="wrap_content"
@@ -66,11 +76,16 @@
             android:layout_height="wrap_content"
             style="@style/textoInput"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/txtErrorApellidos"
+        style="@style/textoError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
         <TextView
             style="@style/textoIdentificarElemento"
             android:layout_width="wrap_content"
@@ -83,11 +98,16 @@
             android:inputType="number"
             style="@style/textoInput"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/txtErrorTelefono"
+        style="@style/textoError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
         <TextView
             style="@style/textoIdentificarElemento"
             android:layout_width="wrap_content"
@@ -99,23 +119,33 @@
             android:layout_height="wrap_content"
             style="@style/textoInput"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/txtErrorLocalidad"
+        style="@style/textoError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
         <TextView
             style="@style/textoIdentificarElemento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Domicilio:" />
         <TextView
-            android:id="@+id/txtCrearCliente"
+            android:id="@+id/txtCrearDomicilioCliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/textoInput"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/txtErrorDomicilio"
+        style="@style/textoError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"

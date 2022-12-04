@@ -121,7 +121,7 @@ class CrearTarea : AppCompatActivity() {
 
     private fun obtenerDatos(): Boolean {
         var correcto=true
-        if (txtCrearDescTarea.text.isNotEmpty()) descripcion=txtCrearDescTarea.toString() else correcto=false; pintar(txtErrorDescripcion)
+        if (txtCrearDescTarea.text.isNotEmpty()) descripcion=txtCrearDescTarea.toString().trim() else correcto=false; pintar(txtErrorDescripcion)
         if (posCliente != -1) dniCliente= listaClientes[posCliente].toString() else correcto=false; pintar(txtErrorCliente)
         if (posTipo != -1) tipo=listaTiposTarea[posTipo] else correcto=false; pintar(txtErrorTipo)
         if (posPrioridad != -1) prioridad=listaPrioridadesTarea[posPrioridad] else correcto=false; pintar(txtErrorPrioridad)

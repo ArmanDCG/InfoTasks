@@ -1,5 +1,6 @@
 package com.example.salidadeportiva.ConexionBD
 
+import android.graphics.Path
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -8,6 +9,7 @@ import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.Modelo.Usuario
 import com.example.infotasks.Utiles.ConversorQueryAModelo
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -84,8 +86,65 @@ object FB {
     suspend fun obtenerTareas():ArrayList<Tarea>{
         return try {
            val query = db.collection("tareas")
+               .orderBy("fechaCreacion", Query.Direction.DESCENDING)
                .get()
                .await()
+            ConversorQueryAModelo.queryATareas(query)
+        }catch (ex:Exception){
+            Log.e("ERROR, al extraer tareas", ex.localizedMessage)
+            arrayListOf()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun obtenerTareasPrioridad(prioridad:String):ArrayList<Tarea>{
+        return try {
+            val query = db.collection("tareas")
+                .whereEqualTo("prioridad", prioridad)
+                .get()
+                .await()
+            ConversorQueryAModelo.queryATareas(query)
+        }catch (ex:Exception){
+            Log.e("ERROR, al extraer tareas", ex.localizedMessage)
+            arrayListOf()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun obtenerTareasTipo(tipo:String):ArrayList<Tarea>{
+        return try {
+            val query = db.collection("tareas")
+                .whereEqualTo("tipo", tipo)
+                .get()
+                .await()
+            ConversorQueryAModelo.queryATareas(query)
+        }catch (ex:Exception){
+            Log.e("ERROR, al extraer tareas", ex.localizedMessage)
+            arrayListOf()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun obtenerTareasEstado(estado:String):ArrayList<Tarea>{
+        return try {
+            val query = db.collection("tareas")
+                .whereEqualTo("estado", estado)
+                .get()
+                .await()
+            ConversorQueryAModelo.queryATareas(query)
+        }catch (ex:Exception){
+            Log.e("ERROR, al extraer tareas", ex.localizedMessage)
+            arrayListOf()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun obtenerTareasFecha(direccion: Query.Direction):ArrayList<Tarea>{
+        return try {
+            val query = db.collection("tareas")
+                .orderBy("fechaCreacion", direccion)
+                .get()
+                .await()
             ConversorQueryAModelo.queryATareas(query)
         }catch (ex:Exception){
             Log.e("ERROR, al extraer tareas", ex.localizedMessage)
