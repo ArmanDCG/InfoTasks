@@ -1,55 +1,59 @@
 package com.example.infotasks
 
-
+import android.app.Activity
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infotasks.Adaptadores.AdaptadorClientes
 import com.example.infotasks.Modelo.Cliente
 import com.example.salidadeportiva.ConexionBD.FB
 import kotlinx.android.synthetic.main.activity_lista_clientes.*
+import kotlinx.android.synthetic.main.activity_lista_clientes_tarea.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class ListaClientes : Fragment() {
+class ListaClientesTarea : AppCompatActivity() {
+
     private lateinit var adaptadorClientes:AdaptadorClientes
     private lateinit var clientes:ArrayList<Cliente>
+    private lateinit var clieteSeleccionado:Cliente
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_lista_clientes_tarea)
     }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.activity_lista_clientes, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
     override fun onStart() {
         super.onStart()
         Log.e("ListaClientes", "abierta")
+        obtenerListaClientes()
+        lanzarAdaptador()
+    }
+
+    private fun obtenerListaClientes(){
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
                 clientes = FB.obtenerClientes()
             }
             job.join()
         }
-        lanzarAdaptador()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        clieteSeleccionado=adaptadorClientes.obtenerClienteSeleccionado()
+        val intentCrearCliente= Intent()
+            .putExtra("clienteSeleccionado", clieteSeleccionado)
+        setResult(Activity.RESULT_OK, intentCrearCliente)
+
+    }
     private fun lanzarAdaptador(){
-        recyclerClientes.setHasFixedSize(true)
-        recyclerClientes.layoutManager = LinearLayoutManager(this.context)
-        adaptadorClientes = AdaptadorClientes(this.requireContext(), clientes,true)
-        recyclerClientes.adapter=adaptadorClientes
+        recyclerClienteTarea.setHasFixedSize(true)
+        recyclerClienteTarea.layoutManager = LinearLayoutManager(this)
+        adaptadorClientes = AdaptadorClientes(this, clientes, true )
+        recyclerClienteTarea.adapter=adaptadorClientes
     }
 }

@@ -51,8 +51,11 @@ class ListaTareas : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val contexto=requireActivity().applicationContext
+
+
         btnAñadirTarea.setOnClickListener{
-            val intentCrearTarea= Intent(this.context, CrearTarea::class.java )
+            val intentCrearTarea= Intent(contexto, CrearTarea::class.java )
             startActivity(intentCrearTarea)
         }
 
@@ -187,6 +190,7 @@ class ListaTareas : Fragment() {
             job.join()
         }
         filtrosPorDefecto()
+        lanzarAdaptador()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -197,6 +201,7 @@ class ListaTareas : Fragment() {
             }
             job.join()
         }
+        lanzarAdaptador()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -207,6 +212,7 @@ class ListaTareas : Fragment() {
             }
             job.join()
         }
+        lanzarAdaptador()
     }
     @RequiresApi(Build.VERSION_CODES.O)
     private fun obtenerTareasPorEstado(estado: String) {
@@ -216,6 +222,7 @@ class ListaTareas : Fragment() {
             }
             job.join()
         }
+        lanzarAdaptador()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -226,6 +233,7 @@ class ListaTareas : Fragment() {
             }
             job.join()
         }
+        lanzarAdaptador()
     }
 
     private fun filtrosPorDefecto(){

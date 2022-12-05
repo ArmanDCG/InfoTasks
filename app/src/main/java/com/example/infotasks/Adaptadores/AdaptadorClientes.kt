@@ -1,6 +1,7 @@
 package com.example.infotasks.Adaptadores
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -27,8 +28,9 @@ import kotlinx.coroutines.runBlocking
 import org.w3c.dom.Text
 
 
-class AdaptadorClientes(var contexto:Context, var clientes:ArrayList<Cliente>) : RecyclerView.Adapter<AdaptadorClientes.ViewHolder>() {
+class AdaptadorClientes(var contexto:Context, var clientes:ArrayList<Cliente>, var asignarClienteTarea:Boolean) : RecyclerView.Adapter<AdaptadorClientes.ViewHolder>() {
 
+    private lateinit var clienteSeleccionado:Cliente
     companion object{
         //Variable que nos indica si una tarea está seleccionada
         var itemSelect=-1
@@ -45,7 +47,10 @@ class AdaptadorClientes(var contexto:Context, var clientes:ArrayList<Cliente>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.bind( clientes, contexto, position,this)
+        holder.bind( clientes, contexto, asignarClienteTarea, position,this)
+    }
+    fun obtenerClienteSeleccionado(): Cliente {
+        return clientes[itemSelect]
     }
 
     class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
@@ -55,17 +60,22 @@ class AdaptadorClientes(var contexto:Context, var clientes:ArrayList<Cliente>) :
 
 
         @SuppressLint("ResourceAsColor", "NotifyDataSetChanged")
-        fun bind(  listaClientes:ArrayList<Cliente>, contexto: Context, pos:Int, AdaptadorEventos: AdaptadorClientes){
+        fun bind(  listaClientes:ArrayList<Cliente>, contexto: Context,asignarClienteTarea: Boolean, pos:Int, AdaptadorEventos: AdaptadorClientes){
 
             txtCardNombreCliente.text = listaClientes[pos].nombre
             txtCardApellidosCliente.text = listaClientes[pos].apellidos
             txtCardDniCliente.text = listaClientes[pos].dni
 
             itemView.setOnClickListener {
-                val intentTarea=Intent(contexto, ClienteActivity::class.java)
-                    .putExtra("cliente", listaClientes[pos])
+                if (asignarClienteTarea){
+                    itemSelect=pos
+                    (contexto as Activity).finish()
+                }else {
+                    val intentTarea = Intent(contexto, ClienteActivity::class.java)
+                        .putExtra("cliente", listaClientes[pos])
 
-                contexto.startActivity(intentTarea)
+                    contexto.startActivity(intentTarea)
+                }
             }
 
             /*itemView.setOnLongClickListener {

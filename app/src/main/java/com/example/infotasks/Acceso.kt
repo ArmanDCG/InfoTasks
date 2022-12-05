@@ -50,7 +50,7 @@ class Acceso : AppCompatActivity() {
                 FB.añadirTarea(Tarea(null, "Router Roto otra vez", TipoTarea.INCIDENCIA, PrioridadTarea.ALTA, EstadoTarea.PENDIENTE,null, FechaHora.obtenerFechaActual(), FechaHora.obtenerFechaActual(), ""))
             }
             job.join()
-        }*/
+        }
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
 
@@ -58,6 +58,9 @@ class Acceso : AppCompatActivity() {
             }
             job.join()
         }
+
+         */
+        Log.e("DNI", Character.isLetter("05720650K"[8]).toString())
 
 
 

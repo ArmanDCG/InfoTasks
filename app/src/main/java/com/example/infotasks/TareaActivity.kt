@@ -59,7 +59,7 @@ class TareaActivity : AppCompatActivity() {
         //Cliente
         txtVistaNombreCliTarea.text=cliente.nombre
         txtVistaApellidosCliTarea.text=cliente.apellidos
-        txtVistaTlfCliTarea.text=cliente.telefono
+        txtVistaTlfCliTarea.text=cliente.telefono.toString()
         txtVistaLocalidadCliTarea.text=cliente.localidad
         txtVistaDomicilioCliTarea.text=cliente.domicilio
     }

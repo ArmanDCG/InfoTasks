@@ -7,7 +7,7 @@ data class Cliente(
     var dni: String? = null,
     var nombre: String? = null,
     var apellidos: String? = null,
-    var telefono: String? = null,
+    var telefono: Int? = null,
     var localidad: String? = null,
     var domicilio: String? = null
 

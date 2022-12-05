@@ -77,11 +77,9 @@ object ConversorQueryAModelo {
             dato!!["dni"].toString(),
             dato["nombre"].toString(),
             dato["apellidos"].toString(),
-            dato["telefono"].toString(),
+            dato["telefono"].toString().toInt(),
             dato["localidad"].toString(),
             dato["domicilio"].toString(),
-
-
         )
     }
 

@@ -1,193 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CrearTarea">
+    tools:context=".CrearTarea"
+    android:orientation="vertical"
+    android:padding="20dp">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:text="Nueva Tarea"
+        android:layout_gravity="top|center_horizontal"
+        style="@style/textoIdentificarElemento"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        style="@style/textoIdentificarElemento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Descripción:"
+        android:layout_marginBottom="10dp"/>
     <EditText
         android:id="@+id/txtCrearDescTarea"
         android:layout_width="338dp"
         android:layout_height="249dp"
         android:ems="10"
-        android:gravity="start|top"
+        android:layout_gravity="top|center_horizontal"
         android:inputType="textMultiLine"
-        android:singleLine="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.183" />
-
-    <TextView
-        android:id="@+id/textView"
-        style="@style/textoIdentificarElemento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Descripción:"
-        app:layout_constraintBottom_toTopOf="@+id/txtCrearDescTarea"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.859" />
-
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/textoIdentificarElemento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tipo:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.191"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCrearDescTarea"
-        app:layout_constraintVertical_bias="0.132" />
-
-    <Spinner
-        android:id="@+id/spinnerTipo"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/txtCrearDescTarea"
-        app:layout_constraintVertical_bias="0.132" />
-
-    <Spinner
-        android:id="@+id/spinnerPrioridad"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/txtCrearDescTarea"
-        app:layout_constraintVertical_bias="0.308" />
-
-    <TextView
-        android:id="@+id/textView3"
-        style="@style/textoIdentificarElemento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Prioridad:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.205" />
-
-    <Spinner
-        android:id="@+id/spinnerCliente"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/txtCrearDescTarea"
-        app:layout_constraintVertical_bias="0.472" />
-
-    <TextView
-        android:id="@+id/textView4"
-        style="@style/textoIdentificarElemento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cliente:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.392" />
-
-    <Button
-        android:id="@+id/btnAddCliNuevo"
-        android:layout_width="65dp"
-        android:layout_height="40dp"
-        android:text="Añadir Nuevo"
-        android:textSize="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
-        app:layout_constraintStart_toEndOf="@+id/spinnerCliente"
-        app:layout_constraintTop_toBottomOf="@+id/txtCrearDescTarea"
-        app:layout_constraintVertical_bias="0.468" />
-
-    <Button
-        android:id="@+id/btnCrearTarea"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Crear"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.925" />
-
-    <Button
-        android:id="@+id/btnCancelarCrearTarea"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancelar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.925" />
-
+        style="@style/textoInput"
+        android:background="@color/white"
+        />
     <TextView
         android:id="@+id/txtErrorDescripcion"
         style="@style/textoError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCrearDescTarea"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="17dp"/>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp">
+
+        <TextView
+            style="@style/textoIdentificarElemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo:" />
+
+        <Spinner
+            android:id="@+id/spinnerTipo"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     <TextView
         android:id="@+id/txtErrorTipo"
         style="@style/textoError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.37"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCrearDescTarea"
-        app:layout_constraintVertical_bias="0.192" />
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="17dp"/>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp">
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/textoIdentificarElemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prioridad:" />
+    <Spinner
+        android:id="@+id/spinnerPrioridad"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
     <TextView
         android:id="@+id/txtErrorPrioridad"
         style="@style/textoError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.37"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCrearDescTarea"
-        app:layout_constraintVertical_bias="0.365" />
+        android:layout_marginLeft="17dp"
+        android:layout_marginBottom="10dp"/>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp"
+        android:gravity="right">
+        <ImageButton
+            android:id="@+id/btnAddCliNuevo"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/add_cliente"
+            android:background="@color/azulMarino" />
+
+        <ImageButton
+            android:id="@+id/btnBuscarCliente"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@color/azulMarino"
+            android:src="@drawable/lupa_cliente"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17dp">
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/textoIdentificarElemento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cliente:" />
+
+        <TextView
+            android:id="@+id/txtCrearNomClienteTarea"
+            android:layout_width="290dp"
+            android:layout_height="match_parent"
+            android:gravity="center|start"
+            android:text="cliente"
+            style="@style/textoInput"/>
+    </LinearLayout>
     <TextView
         android:id="@+id/txtErrorCliente"
         style="@style/textoError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.37"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCrearDescTarea"
-        app:layout_constraintVertical_bias="0.523" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginLeft="17dp"
+        android:layout_marginBottom="10dp"/>
+
+
+
+
+
+    <Button
+        android:id="@+id/btnCrearTarea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crear" />
+
+    <Button
+        android:id="@+id/btnCancelarCrearTarea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar" />
+
+
+
+</LinearLayout>
