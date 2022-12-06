@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Constantes.EstadoTarea
 import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Modelo.Tarea
@@ -19,7 +20,6 @@ import com.example.infotasks.R
 import com.example.infotasks.TareaActivity
 import com.example.infotasks.Utiles.FechaHora.dateToString
 import com.example.infotasks.Utiles.Funcionales.toast
-import com.example.salidadeportiva.ConexionBD.FB
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -27,11 +27,6 @@ import kotlinx.coroutines.runBlocking
 
 
 class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : RecyclerView.Adapter<AdaptadorTareas.ViewHolder>() {
-
-    companion object{
-        //Variable que nos indica si una tarea está seleccionada
-        var itemSelect=-1
-    }
 
     override fun getItemCount(): Int{
         return this.tareas.size!!
@@ -58,7 +53,7 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
 
         @RequiresApi(Build.VERSION_CODES.O)
         @SuppressLint("ResourceAsColor", "NotifyDataSetChanged")
-        fun bind( tarea:Tarea, listaTareas:ArrayList<Tarea>, contexto: Context, pos:Int, AdaptadorEventos: AdaptadorTareas){
+        fun bind( tarea:Tarea, listaTareas:ArrayList<Tarea>, contexto: Context, pos:Int, AdaptadorTareas: AdaptadorTareas){
 
             insertarImagenPrioridad(tarea.prioridad!!)
             txtCardTipo.text = tarea.tipo.toString()
@@ -89,7 +84,7 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
                         }
                         if (borrado){
                             listaTareas.remove(tarea)
-                            AdaptadorEventos.notifyDataSetChanged()
+                            AdaptadorTareas.notifyDataSetChanged()
                             toast(contexto, "Tarea borrada correctamente")
                         }
                     }.setNegativeButton("Cancelar"){_,_->}

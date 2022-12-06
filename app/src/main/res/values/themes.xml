@@ -27,11 +27,11 @@
     <style name="textoInput">
         <item name="android:textSize">16dp</item>
         <item name="android:inputType">text</item>
+        <item name="background">@drawable/border_input_text</item>
     </style>
 
     <style name="textoError">
         <item name="android:textSize">10dp</item>
-        <item name="android:text">"*Campo Obligatorio"</item>
         <item name="android:textColor">@color/rojoError</item>
         <item name="android:visibility">invisible</item>
     </style>

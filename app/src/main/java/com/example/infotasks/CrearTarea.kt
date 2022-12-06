@@ -6,18 +6,18 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SpinnerAdapter
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Constantes.TipoTarea
 import com.example.infotasks.Modelo.Cliente
 import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.Utiles.FechaHora
-import com.example.salidadeportiva.ConexionBD.FB
 import kotlinx.android.synthetic.main.activity_crear_tarea.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -114,11 +114,13 @@ class CrearTarea : AppCompatActivity() {
         btnCancelarCrearTarea.setOnClickListener{finish()}
     }
 
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode== Activity.RESULT_OK && requestCode==REQUEST_CODE){
             cliente= data?.getSerializableExtra("clienteSeleccionado",) as Cliente
-
+            Log.e("Cliente elegido", cliente.toString())
             if (cliente!=null)
                 txtCrearNomClienteTarea.text="${cliente!!.nombre}, ${cliente!!.apellidos}"
         }

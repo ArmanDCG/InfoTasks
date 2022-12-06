@@ -17,148 +17,157 @@
         android:layout_gravity="top|center_horizontal"
         style="@style/textoIdentificarElemento"
         />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!--VIEW TEXT-->
+        <LinearLayout
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="right"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="3dp">
+            <TextView
+                style="@style/textoIdentificarElemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DNI:"
+                android:layout_marginBottom="20dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-        <TextView
-            style="@style/textoIdentificarElemento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DNI:"
-            android:layout_marginRight="5dp"/>
-        <EditText
-            android:id="@+id/txtCrearDniCliente"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            style="@style/textoInput"
-            android:background="@android:color/transparent" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/txtErrorDni"
-        style="@style/textoError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-        <TextView
-            style="@style/textoIdentificarElemento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre:"
-            android:layout_marginRight="5dp"/>
-        <EditText
-            android:id="@+id/txtCrearNombreCliente"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/textoInput"
-            android:background="@android:color/transparent"/>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/txtErrorNombre"
-        style="@style/textoError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-        <TextView
-            style="@style/textoIdentificarElemento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Apellidos:"
-            android:layout_marginRight="5dp"/>
-        <EditText
-            android:id="@+id/txtCrearApellidosCliente"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/textoInput"
-            android:background="@android:color/transparent"/>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/txtErrorApellidos"
-        style="@style/textoError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-        <TextView
-            style="@style/textoIdentificarElemento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Telefono:"
-            android:layout_marginRight="5dp"/>
-        <EditText
-            android:id="@+id/txtCrearTlfCliente"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:inputType="number"
-            style="@style/textoInput"
-            android:background="@android:color/transparent"/>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/txtErrorTelefono"
-        style="@style/textoError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-        <TextView
-            style="@style/textoIdentificarElemento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Localidad:"
-            android:layout_marginRight="5dp"/>
+            <TextView
+                style="@style/textoIdentificarElemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre:"
+                android:layout_marginBottom="20dp"/>
 
-        <EditText
-            android:id="@+id/txtCrearLocalidadCliente"
-            style="@style/textoInput"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"/>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/txtErrorLocalidad"
-        style="@style/textoError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+            <TextView
+                style="@style/textoIdentificarElemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apellidos:"
+                android:layout_marginBottom="20dp"/>
+            <TextView
+                style="@style/textoIdentificarElemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telefono:"
+                android:layout_marginBottom="20dp"/>
+            <TextView
+                style="@style/textoIdentificarElemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Localidad:"
+                android:layout_marginBottom="20dp"/>
+            <TextView
+                style="@style/textoIdentificarElemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Domicilio:"
+                android:layout_marginBottom="20dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-        <TextView
-            style="@style/textoIdentificarElemento"
-            android:layout_width="wrap_content"
+
+        </LinearLayout>
+        <!--EDIT TEXT-->
+        <LinearLayout
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Domicilio:"
-            android:layout_marginRight="5dp"/>
-        <EditText
-            android:id="@+id/txtCrearDomicilioCliente"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/textoInput"
-            android:background="@android:color/transparent"/>
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/txtCrearDniCliente"
+                style="@style/textoInput"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_input_text"
+                android:maxLength="9" />
+
+            <TextView
+                android:id="@+id/txtErrorDni"
+                style="@style/textoError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:text="" />
+
+            <EditText
+                android:id="@+id/txtCrearNombreCliente"
+                style="@style/textoInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_input_text" />
+
+            <TextView
+                android:id="@+id/txtErrorNombre"
+                style="@style/textoError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"/>
+
+            <EditText
+                android:id="@+id/txtCrearApellidosCliente"
+                style="@style/textoInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_input_text" />
+
+            <TextView
+                android:id="@+id/txtErrorApellidos"
+                style="@style/textoError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"/>
+
+            <EditText
+                android:id="@+id/txtCrearTlfCliente"
+                style="@style/textoInput"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_input_text"
+                android:inputType="number"
+                android:maxLength="9" />
+
+            <TextView
+                android:id="@+id/txtErrorTelefono"
+                style="@style/textoError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"/>
+
+            <EditText
+                android:id="@+id/txtCrearLocalidadCliente"
+                style="@style/textoInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_input_text" />
+
+            <TextView
+                android:id="@+id/txtErrorLocalidad"
+                style="@style/textoError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"/>
+
+            <EditText
+                android:id="@+id/txtCrearDomicilioCliente"
+                style="@style/textoInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_input_text" />
+
+            <TextView
+                android:id="@+id/txtErrorDomicilio"
+                style="@style/textoError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+
+        </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/txtErrorDomicilio"
-        style="@style/textoError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -179,5 +188,6 @@
             android:layout_height="wrap_content"
             android:text="Crear" />
     </LinearLayout>
+
 
 </LinearLayout>

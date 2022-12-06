@@ -1,6 +1,6 @@
-package com.example.salidadeportiva.ConexionBD
+package com.example.infotask.ConexionBD
 
-import android.graphics.Path
+
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
@@ -211,6 +210,18 @@ object FB {
         }
     }
 
+    suspend fun borrarCliente(idCliente:String):Boolean{
+        return try {
+            db.collection("tareas")
+                .document()
+                .delete()
+                .await()
+            true
+        }catch (ex:Exception){
+            Log.e("No se pudo borrar las tareas asosciadas al cliente", ex.localizedMessage)
+            false
+        }
+    }
     /*
     //--GET---------------------------------------------------------------
     suspend fun getUsuario(email: String): Usuario? {

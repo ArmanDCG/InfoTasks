@@ -10,12 +10,12 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Adaptadores.AdaptadorTareas
 import com.example.infotasks.Constantes.EstadoTarea
 import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Constantes.TipoTarea
 import com.example.infotasks.Modelo.Tarea
-import com.example.salidadeportiva.ConexionBD.FB
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_lista_tareas.*
 import kotlinx.coroutines.Dispatchers

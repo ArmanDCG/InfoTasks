@@ -5,9 +5,9 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Modelo.Cliente
 import com.example.infotasks.Modelo.Tarea
-import com.example.salidadeportiva.ConexionBD.FB
 import kotlinx.android.synthetic.main.activity_tarea.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
