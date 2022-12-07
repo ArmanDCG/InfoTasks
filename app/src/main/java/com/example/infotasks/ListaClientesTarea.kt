@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Adaptadores.AdaptadorClientes
 import com.example.infotasks.Modelo.Cliente
+import kotlinx.android.synthetic.main.activity_lista_clientes.*
 import kotlinx.android.synthetic.main.activity_lista_clientes_tarea.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -41,9 +42,9 @@ class ListaClientesTarea : AppCompatActivity() {
 
 
     private fun lanzarAdaptador(){
-        recyclerClienteTarea.setHasFixedSize(true)
-        recyclerClienteTarea.layoutManager = LinearLayoutManager(this)
+        recyclerClientes.setHasFixedSize(true)
+        recyclerClientes.layoutManager = LinearLayoutManager(this)
         adaptadorClientes = AdaptadorClientes(this, clientes, true )
-        recyclerClienteTarea.adapter=adaptadorClientes
+        recyclerClientes.adapter=adaptadorClientes
     }
 }

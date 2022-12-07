@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infotask.ConexionBD.FB
@@ -17,9 +18,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class ListaClientes : Fragment() {
+class ListaClientes : Fragment()   {
     private lateinit var adaptadorClientes: AdaptadorClientes
     private lateinit var clientes:ArrayList<Cliente>
+    private lateinit var listaClientesFiltrado:ArrayList<Cliente>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,19 +34,34 @@ class ListaClientes : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adaptadorClientes.filter.filter(newText)
+                return true
+            }
+
+        })
     }
 
     override fun onStart() {
         super.onStart()
-        Log.e("ListaClientes", "abierta")
+        obtenerListaClientes()
+        lanzarAdaptador()
+    }
+
+    private fun obtenerListaClientes() {
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
                 clientes = FB.obtenerClientes()
             }
             job.join()
         }
-        lanzarAdaptador()
+        listaClientesFiltrado=clientes
+
     }
 
     private fun lanzarAdaptador(){

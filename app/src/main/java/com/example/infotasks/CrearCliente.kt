@@ -1,5 +1,7 @@
 package com.example.infotasks
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -45,15 +47,19 @@ class CrearCliente : AppCompatActivity() {
             Log.e("Resultado de validación de campos", validacionCampos.toString())
 
             if(validacionCampos[false]==0){
+                var nuevoCliente=Cliente(dni, nombre, apellidos, Integer.parseInt(telefono), localidad, domicilio)
                 runBlocking {
                     val job: Job = launch(context = Dispatchers.Default) {
-                    addCliente= FB.añadirCliente(Cliente(dni, nombre, apellidos, Integer.parseInt(telefono), localidad, domicilio))
+                    addCliente= FB.añadirCliente(nuevoCliente)
                     }
                     job.join()
                 }
                 if (addCliente) {
                     toast(this, "Nuevo Cliente añadido correctamente")
+                    var intent= Intent().putExtra("clienteAsigTarea",nuevoCliente )
+                    setResult(Activity.RESULT_OK, intent)
                     finish()
+
                 }else {
                     toast(this, "NO se pudo añadir el nuevo Cliente")
                 }
