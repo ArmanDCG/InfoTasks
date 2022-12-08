@@ -14,13 +14,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlin.properties.Delegates
 
 
 class Acceso : AppCompatActivity() {
-    var credencialesCorrectas:Boolean = false
-    var mail:String = ""
-    var pass:String = ""
-    var usuario:Usuario? = null
+    private var credencialesCorrectas by Delegates.notNull<Boolean>()
+    private lateinit var mail:String
+    private lateinit var pass:String
+    private var usuario:Usuario? = null
 
 
 
@@ -30,29 +31,10 @@ class Acceso : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acceso)
 
+        supportActionBar!!.hide()
+
         txtID.setText("admin@infotasks.com")
         txtPass.setText("administrador")
-
-
-        /*runBlocking {
-            val job: Job = launch(context = Dispatchers.Default) {
-                FB.añadirTarea(Tarea(null, "Router Roto otra vez", TipoTarea.INCIDENCIA, PrioridadTarea.ALTA, EstadoTarea.PENDIENTE,null, FechaHora.obtenerFechaActual(), FechaHora.obtenerFechaActual(), ""))
-            }
-            job.join()
-        }
-        runBlocking {
-            val job: Job = launch(context = Dispatchers.Default) {
-
-                Log.e("Tareas",FB.obtenerTareas().toString())
-            }
-            job.join()
-        }
-
-         */
-        Log.e("DNI", Character.isLetter("05720650K"[8]).toString())
-
-
-
 
         btnAcceder.setOnClickListener {
             if (!camposVacios()) {

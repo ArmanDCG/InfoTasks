@@ -1,12 +1,15 @@
 package com.example.infotasks
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +37,8 @@ class ListaTareas : Fragment() {
     private var numFechaCreacion=1 //1=Descendente, 2=Ascendente
     private var numFechaUltimaMod=0 //1=Descendente, 2=Ascendente
 
+    lateinit var contexto: Context
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +56,7 @@ class ListaTareas : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val contexto=requireActivity().applicationContext
+        contexto=this.requireActivity()
 
 
         btnAñadirTarea.setOnClickListener{
@@ -71,6 +76,7 @@ class ListaTareas : Fragment() {
                 1->{
                     obtenerTareasPorPrioridad(PrioridadTarea.BAJA.toString())
                     btnOrdPrioridad.text="Prioridad\nBaja"
+                    filtrosPorDefecto(btnOrdPrioridad)
                 }
                 2->{
                     obtenerTareasPorPrioridad(PrioridadTarea.MEDIA.toString())
@@ -93,6 +99,7 @@ class ListaTareas : Fragment() {
                 1->{
                     obtenerTareasPorTipo(TipoTarea.INCIDENCIA.toString())
                     btnOrdTipo.text="Tipo\nIncidencia"
+                    filtrosPorDefecto(btnOrdTipo)
                 }
                 2->{
                     obtenerTareasPorTipo(TipoTarea.INSTALACION.toString())
@@ -112,11 +119,13 @@ class ListaTareas : Fragment() {
                 1->{
                     obtenerTareasPorEstado(EstadoTarea.PENDIENTE.toString())
                     btnOrdEstado.text="Estado\nPendiente"
+                    filtrosPorDefecto(btnOrdEstado)
                 }
                 2->{
                     obtenerTareasPorEstado(EstadoTarea.REALIZADA.toString())
                     btnOrdEstado.text="Estado\nRealizada"
                     numEstado=-1
+
                 }
             }
         }
@@ -129,20 +138,21 @@ class ListaTareas : Fragment() {
                 1->{
                     obtenerTareasPorFecha(Query.Direction.DESCENDING)
                     icono= requireContext().resources?.getDrawable(R.drawable.menor_primero)!!
-                    btnOrdFechCreacion.setCompoundDrawables(null, null, icono, null)
+                    btnOrdFechCreacion.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, icono, null)
                 }
                 2->{
                     obtenerTareasPorFecha(Query.Direction.ASCENDING)
                     icono= requireContext().resources?.getDrawable(R.drawable.mayor_primero)!!
-                    btnOrdFechCreacion.setCompoundDrawables(null, null, icono, null)
+                    btnOrdFechCreacion.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, icono, null)
                     numFechaCreacion=0
+                    filtrosPorDefecto(btnOrdFechCreacion)
                 }
             }
         }
         btnOrdUltimaMod.setOnClickListener {
             //1=Descendente, 2=Ascendente
             numFechaUltimaMod++
-            var icono:Drawable
+            var icono: Drawable
             when(numFechaUltimaMod){
                 0->{
                     obtenerTareasPorDefecto()
@@ -150,13 +160,14 @@ class ListaTareas : Fragment() {
                 }
                 1->{
                     obtenerTareasPorFecha(Query.Direction.DESCENDING)
-                    icono= requireContext().resources?.getDrawable(R.drawable.menor_primero)!!
-                    btnOrdFechCreacion.setCompoundDrawables(null, null, icono, null)
+                    icono= contexto.resources?.getDrawable(R.drawable.menor_primero)!!
+                    btnOrdUltimaMod.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null,icono, null)
+                    filtrosPorDefecto(btnOrdUltimaMod)
                 }
                 2->{
                     obtenerTareasPorFecha(Query.Direction.ASCENDING)
-                    icono= requireContext().resources?.getDrawable(R.drawable.mayor_primero)!!
-                    btnOrdFechCreacion.setCompoundDrawables(null, null, icono, null)
+                    icono= contexto.resources?.getDrawable(R.drawable.mayor_primero)!!
+                    btnOrdUltimaMod.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, icono, null)
                     numFechaUltimaMod=-1
                 }
 
@@ -176,8 +187,8 @@ class ListaTareas : Fragment() {
 
     private fun lanzarAdaptador(){
         recyclerTareas.setHasFixedSize(true)
-        recyclerTareas.layoutManager = LinearLayoutManager(this.context)
-        adaptadorTareas = AdaptadorTareas(this.requireContext(), tareas )
+        recyclerTareas.layoutManager = LinearLayoutManager(contexto)
+        adaptadorTareas = AdaptadorTareas(contexto, tareas )
         recyclerTareas.adapter=adaptadorTareas
     }
 
@@ -189,7 +200,7 @@ class ListaTareas : Fragment() {
             }
             job.join()
         }
-        filtrosPorDefecto()
+
         lanzarAdaptador()
     }
 
@@ -202,6 +213,7 @@ class ListaTareas : Fragment() {
             job.join()
         }
         lanzarAdaptador()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -213,6 +225,8 @@ class ListaTareas : Fragment() {
             job.join()
         }
         lanzarAdaptador()
+
+
     }
     @RequiresApi(Build.VERSION_CODES.O)
     private fun obtenerTareasPorEstado(estado: String) {
@@ -223,6 +237,7 @@ class ListaTareas : Fragment() {
             job.join()
         }
         lanzarAdaptador()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -234,20 +249,41 @@ class ListaTareas : Fragment() {
             job.join()
         }
         lanzarAdaptador()
+
     }
 
-    private fun filtrosPorDefecto(){
-        numPrioridad=0
-        numEstado=0
-        numTipo=0
-        numFechaCreacion=1
-        numFechaUltimaMod=0
-
-        //Texto de Filtros
-        btnOrdPrioridad.text="Prioridad"
-        btnOrdTipo.text="Tipo"
-        btnOrdEstado.text="Estado"
-        btnOrdFechCreacion.text="Fecha Creación"
-        btnOrdUltimaMod.text="Ultima Mod"
+    private fun filtrosPorDefecto(btn:Button){
+        val botones= arrayListOf<Button>(btnOrdPrioridad,btnOrdTipo, btnOrdEstado, btnOrdFechCreacion, btnOrdUltimaMod )
+        botones.forEach {
+            if (it != btn){
+                when(it){
+                    btnOrdPrioridad->{
+                        Log.e("btn", "Prioridad")
+                        numPrioridad=0
+                        btnOrdPrioridad.text="Prioridad"
+                    }
+                    btnOrdTipo->{
+                        Log.e("btn", "Tipo")
+                        numTipo=0
+                        btnOrdTipo.text="Tipo"
+                    }
+                    btnOrdEstado->{
+                        Log.e("btn", "Estado")
+                        numEstado=0
+                        btnOrdEstado.text="Estado"
+                    }
+                    btnOrdFechCreacion->{
+                        Log.e("btn", "creación")
+                        numFechaCreacion=1
+                        btnOrdFechCreacion.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
+                    }
+                    btnOrdUltimaMod->{
+                        Log.e("btn", "modificación")
+                        btnOrdUltimaMod.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
+                        numFechaUltimaMod=0
+                    }
+                }
+            }
+        }
     }
 }

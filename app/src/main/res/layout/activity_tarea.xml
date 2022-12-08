@@ -91,7 +91,7 @@
                         android:text="Fecha Creación:" />
 
                     <TextView
-                        android:id="@+id/txtFechaCreacionTarea"
+                        android:id="@+id/txtVistaFechaCreacionTarea"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -112,7 +112,7 @@
                         android:text="Fecha Última Modificación:" />
 
                     <TextView
-                        android:id="@+id/txtFechaUltimaModTarea"
+                        android:id="@+id/txtVistaFechaUltimaModTarea"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"

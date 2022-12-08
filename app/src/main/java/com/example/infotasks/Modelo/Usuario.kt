@@ -7,11 +7,12 @@ data class Usuario(
     var mail: String? = null, //ID
     var nombre: String? = null,
     var apellidos: String? = null,
+    var telefono: Int?=null,
     var rol: RolUsuario? = null, //Acministrador, Tecnico
     var activo: Boolean = false
     ):Serializable
 {
     override fun toString(): String {
-        return "Mail:${mail}, Nombre:${nombre}, Apellidos:${apellidos}, Rol:${rol}, Activo:${activo}"
+        return "Mail:${mail}, Nombre:${nombre}, Apellidos:${apellidos}, Telefono:${telefono}, Rol:${rol}, Activo:${activo}"
     }
 }

@@ -101,7 +101,7 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
         @SuppressLint("ResourceAsColor")
         private fun pintarEstado(contexto:Context, estado: EstadoTarea) {
             if (estado == EstadoTarea.PENDIENTE){
-                txtCardEstado.setBackgroundColor(contexto.getColor(R.color.verde))
+                txtCardEstado.setBackgroundColor(contexto.getColor(R.color.amarillo))
             }else{
                 txtCardEstado.setBackgroundColor(contexto.getColor(R.color.gris))
             }

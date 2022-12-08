@@ -28,15 +28,18 @@
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_crear_cliente.xml" value="0.33" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_crear_tarea.xml" value="0.33" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_crear_tecnico.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_crear_usuario.xml" value="0.22" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_lista_clientes.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_lista_clientes_tarea.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_lista_tareas.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_lista_tecnicos.xml" value="0.203125" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_tarea.xml" value="0.22" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/activity_tareas.xml" value="0.33" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/card_view_Cliente.xml" value="0.33" />
-        <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/card_view_cliente.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/card_view_cliente.xml" value="0.33" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/card_view_tarea.xml" value="0.25" />
+        <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/card_view_tecnico.xml" value="0.25" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/shape_linear_layout.xml" value="0.2015625" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/spinner_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Usuario/Desktop/Practicas/InfoTasks/app/src/main/res/layout/tareas_card.xml" value="0.20208333333333334" />

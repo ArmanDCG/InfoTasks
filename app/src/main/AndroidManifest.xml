@@ -11,10 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InfoTasks">
         <activity
+            android:name=".ListaUsuarios"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
             android:name=".ListaClientesTarea"
             android:exported="false" />
         <activity
-            android:name=".CrearTecnico"
+            android:name=".CrearUsuario"
             android:exported="false" />
         <activity
             android:name=".ClienteActivity"
@@ -28,12 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".CrearTarea"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false"
+            android:noHistory="false">
         </activity>
         <activity
             android:name=".TareaActivity"
@@ -47,7 +47,13 @@
             android:exported="false" />
         <activity
             android:name=".Acceso"
-            android:exported="false"></activity>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

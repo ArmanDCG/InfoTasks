@@ -1,11 +1,9 @@
 package com.example.infotasks
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.infotasks.Modelo.Usuario
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import kotlinx.android.synthetic.main.activity_administrador.*
 
 
@@ -20,9 +18,11 @@ class Administrador : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_administrador)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         listaTareas=ListaTareas()
         listaClientes=ListaClientes()
-        //listaTecnicos=ListaTecnicos()
+        listaTecnicos=ListaUsuarios()
 
         navigation_menu.setOnItemSelectedListener {
             when(it.itemId){
@@ -32,8 +32,6 @@ class Administrador : AppCompatActivity() {
             }
             return@setOnItemSelectedListener true
         }
-
-
 
     }
 

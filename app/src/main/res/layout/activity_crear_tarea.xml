@@ -39,19 +39,19 @@
             android:layout_width="338dp"
             android:layout_height="249dp"
             android:layout_gravity="top|center_horizontal"
-            android:background="@color/white"
+            android:autoText="true"
+            android:background="@drawable/border_input_text"
             android:ems="10"
             android:gravity="start"
             android:inputType="textMultiLine" />
 
-    <TextView
-        android:id="@+id/txtErrorDescripcion"
-        style="@style/textoError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="17dp"
-        android:text="*Campo obligatorio" />
+        <TextView
+            android:id="@+id/txtErrorDescripcion"
+            style="@style/textoError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginBottom="15dp" />
 
 
     <LinearLayout
@@ -96,13 +96,18 @@
             android:id="@+id/spinnerTipo"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/border_input_text"
+            android:dropDownSelector="@color/azulMarino"/>
 
         <Spinner
             android:id="@+id/spinnerPrioridad"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/border_input_text"
+            android:dropDownSelector="@color/azulMarino"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -139,8 +144,7 @@
             style="@style/textoError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="*Campo obligatorio"/>
+            android:layout_marginBottom="10dp" />
 
     </LinearLayout>
 

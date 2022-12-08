@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.core.Query
 
 
 import com.google.type.LatLngOrBuilder
@@ -26,18 +27,29 @@ object ConversorQueryAModelo {
      * Metodo para convertir una Query de un usuario a un modelo Usuario
      */
     fun queryAUsuario(dato: QueryDocumentSnapshot?): Usuario {
+        Log.e("UserLoger", dato.toString())
         return Usuario(
             dato!!.get("mail").toString(),
             dato.get("nombre").toString(),
             dato.get("apellidos").toString(),
+            dato.get("telefono").toString().toInt(),
             RolUsuario.valueOf(dato.get("rol").toString()),
             dato.get("activo") as Boolean
         )
     }
+    fun queryAUsuarios(dato:QuerySnapshot?):ArrayList<Usuario>{
+        var usuarios= arrayListOf<Usuario>()
+        for (dc:DocumentChange in dato?.documentChanges!!){
+            if (dc.type == DocumentChange.Type.ADDED){
+                usuarios.add(queryAUsuario(dc.document))
+            }
+        }
+        Log.e("Usuarios", usuarios.toString())
+        return usuarios
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun queryATareas(dato: QuerySnapshot?):ArrayList<Tarea> {
-        var tarea:Tarea
         var tareas= arrayListOf<Tarea>()
         for(dc: DocumentChange in dato?.documentChanges!!) {
             if (dc.type == DocumentChange.Type.ADDED) {

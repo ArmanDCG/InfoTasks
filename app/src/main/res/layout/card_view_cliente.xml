@@ -4,37 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="90dp"
     android:id="@+id/cardTarea"
-    android:layout_marginBottom="10dp"
-    card_view:cardCornerRadius="20dp"
+    android:layout_marginBottom="5dp"
+    card_view:cardCornerRadius="15dp"
     card_view:cardElevation="6dp"
     card_view:contentPaddingTop="10dp"
-    card_view:flow_verticalAlign="center">
+    card_view:flow_horizontalAlign="start">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
+
 
     <TextView
-        android:id="@+id/txtCardNombreCliente"
+        android:id="@+id/txtCardNombreTecnico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:textSize="16dp"
-        android:text="Nombre" />
+        android:text="Nombre"
+        style="@style/textoIdentificarElemento"/>
 
     <TextView
-        android:id="@+id/txtCardApellidosCliente"
+        android:id="@+id/txtCardApellidosTecnico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="16dp"
+        style="@style/textoIdentificarElemento"
         android:text="Apellidos"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginTop="5dp"/>
     <TextView
-        android:id="@+id/txtCardDniCliente"
+        android:id="@+id/txtCardMailTecnico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
         android:textSize="14dp"
         android:text="dni"
-        android:layout_marginBottom="2dp"/>
+        android:layout_marginTop="5dp"/>
+
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>

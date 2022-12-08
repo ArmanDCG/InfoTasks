@@ -11,16 +11,19 @@
 
     <!--Colores principales de la App-->
     <color name="turquesa">#5DBCAC</color>
-    <color name="azulMarino">#1B4B93</color>
-
-
+    <color name="azulMarino">#17458A</color>
+    <color name="azulWhite">#D3F2FF</color>
     <color name="turquesaGris">#99B6B1</color>
     <color name="turquesaPuro">#00FFCC</color>
+    <color name="turquesaWhite">#F6FFFD</color>
+
+
+
     <color name="verdeOscuro">#207500</color>
-    <color name="gris">#7E7E7E</color>
+    <color name="gris">#CACACA</color>
     <color name="verde">#53A843</color>
     <color name="rojoError">#CA0000</color>
-    <color name="azulBackGround">#C0DEEA</color>
+    <color name="amarillo">#F7F298</color>
     <color name="azul">#17A0BA</color>
     <color name="amarilloBackGround">#FDFDEB</color>
     <color name="naranja">#DC951D</color>

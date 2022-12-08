@@ -155,13 +155,26 @@ object FB {
     suspend fun obtenerClientes():ArrayList<Cliente>{
         return try {
             val query=db.collection("clientes")
-                .orderBy("apellidos")
-                //.orderBy("nombre")
+                //.orderBy("apellidos")
+                .orderBy("nombre")
                 .get()
                 .await()
             ConversorQueryAModelo.queryAClientes(query)
         }catch (ex:Exception){
             Log.e("Error al obtener clientes", ex.localizedMessage)
+            arrayListOf()
+        }
+    }
+    suspend fun obtenerUsuarios():ArrayList<Usuario>{
+        return try {
+            val query=db.collection("usuarios")
+                //.orderBy("apellidos")
+                .orderBy("nombre")
+                .get()
+                .await()
+            ConversorQueryAModelo.queryAUsuarios(query)
+        }catch (ex:Exception){
+            Log.e("Error al obtener usuarios", ex.localizedMessage)
             arrayListOf()
         }
     }
@@ -188,10 +201,6 @@ object FB {
         }
     }
 
-
-
-
-
     fun obtenerIdTarea(): String {
         return db.collection("tareas").document().id
     }
@@ -214,12 +223,25 @@ object FB {
     suspend fun borrarCliente(idCliente:String):Boolean{
         return try {
             db.collection("tareas")
-                .document()
+                .document(idCliente)
                 .delete()
                 .await()
             true
         }catch (ex:Exception){
             Log.e("No se pudo borrar las tareas asosciadas al cliente", ex.localizedMessage)
+            false
+        }
+    }
+
+    suspend fun borrarUsuario(idUsuario:String):Boolean{
+        return try {
+            db.collection("usuarios")
+                .document(idUsuario)
+                .delete()
+                .await()
+            true
+        }catch (ex:Exception){
+            Log.e("No se pudo borrar el usuario $idUsuario", ex.localizedMessage)
             false
         }
     }

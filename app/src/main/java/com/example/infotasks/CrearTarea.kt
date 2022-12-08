@@ -26,25 +26,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlin.properties.Delegates
 
 class CrearTarea : AppCompatActivity() {
-    private val REQUEST_CODE=Activity.RESULT_OK
+    private val REQUEST_CODE=1
 
     private lateinit var descripcion:String
     private lateinit var tipo:TipoTarea
     private lateinit var prioridad:PrioridadTarea
     private lateinit var dniCliente:String
-    private  var cliente: Cliente? =null
+    private var cliente: Cliente? = null
 
 
-    private var listaTiposTarea= arrayListOf(TipoTarea.INCIDENCIA, TipoTarea.INSTALACION)
-    private var posTipo:Int=0
-    private var listaPrioridadesTarea= arrayListOf(PrioridadTarea.BAJA, PrioridadTarea.MEDIA, PrioridadTarea.ALTA)
-    private var posPrioridad:Int=0
+    private lateinit var listaTiposTarea:ArrayList<TipoTarea>
+    private var posTipo by Delegates.notNull<Int>()
+    private lateinit var listaPrioridadesTarea:ArrayList<PrioridadTarea>
+    private var posPrioridad by Delegates.notNull<Int>()
 
-
-
-
+    private lateinit var validacionCampos:HashMap<Boolean,Int>
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -53,9 +52,14 @@ class CrearTarea : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_tarea)
 
+        listaTiposTarea = arrayListOf(TipoTarea.INCIDENCIA, TipoTarea.INSTALACION)
+        listaPrioridadesTarea = arrayListOf(PrioridadTarea.BAJA, PrioridadTarea.MEDIA, PrioridadTarea.ALTA)
+        posPrioridad=0
+        posTipo=0
+
+        validacionCampos= hashMapOf(true to 0, false to 0)
 
         spinnerTipo.adapter=ArrayAdapter(this, R.layout.spinner_item,R.id.txtItem, listaTiposTarea)
-
         spinnerTipo.onItemSelectedListener= object :AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
@@ -85,12 +89,12 @@ class CrearTarea : AppCompatActivity() {
 
         btnAddCliNuevo.setOnClickListener {
             val intentAddCliente= Intent(this, CrearCliente::class.java)
-            startActivityForResult(intentAddCliente,REQUEST_CODE)
+            this.startActivityForResult(intentAddCliente,REQUEST_CODE)
         }
         btnBuscarCliente.setOnClickListener {
             val intentLCT=Intent(this, ListaClientesTarea::class.java)
             Log.e("REQUEST_CODE", REQUEST_CODE.toString())
-            startActivityForResult(intentLCT, REQUEST_CODE)
+            this.startActivityForResult(intentLCT, REQUEST_CODE)
         }
 
         btnCrearTarea.setOnClickListener {
@@ -133,29 +137,44 @@ class CrearTarea : AppCompatActivity() {
     }
 
     private fun obtenerDatos(): Boolean {
-        var correcto = true
-
-        if (txtCrearDescTarea.text.isNotEmpty()) {
-            descripcion = txtCrearDescTarea.toString().trim()
-        } else {
-            correcto = false
-            mostrarError(txtErrorDescripcion)
-        }
-
-        if (cliente!=null) {
-            dniCliente = cliente!!.dni.toString()
-        }else {
-            correcto = false
-            mostrarError(txtErrorCliente)
-        }
+        validacionCampos[validarDescripcion()]=+1
+        validacionCampos[validarCliente()]=+1
         tipo=listaTiposTarea[posTipo]
         prioridad=listaPrioridadesTarea[posPrioridad]
 
-        return correcto
+        Log.e("Validar crear tarea" ,validacionCampos.toString())
+
+        return (validacionCampos[false]==0)
     }
 
-    private fun mostrarError(txtError: TextView?) {
-        txtError!!.visibility= View.VISIBLE
+    private fun validarDescripcion():Boolean{
+        descripcion = txtCrearDescTarea.text.toString().trim()
+        return if(descripcion.isEmpty()) {
+            mostrarError(txtErrorDescripcion)
+            false
+        }else{
+            ocultarError(txtErrorDescripcion)
+            true
+        }
+    }
+
+    private fun validarCliente():Boolean{
+        return if(cliente!=null){
+            dniCliente = cliente!!.dni.toString()
+            ocultarError(txtErrorCliente)
+            true
+        }else{
+            mostrarError(txtErrorCliente)
+            false
+        }
+    }
+
+    private fun mostrarError(textView: TextView?) {
+        textView!!.visibility= View.VISIBLE
+    }
+
+    private fun ocultarError(textView:TextView){
+        textView.visibility=View.INVISIBLE
     }
 
 }

@@ -71,9 +71,9 @@ class AdaptadorClientes(var contexto:Context, var clientes:ArrayList<Cliente>, v
 
     @SuppressLint("ResourceAsColor", "NotifyDataSetChanged")
     class ViewHolder(view: View):RecyclerView.ViewHolder(view){
-        val txtCardNombreCliente=view.findViewById<TextView>(R.id.txtCardNombreCliente)
-        val txtCardApellidosCliente=view.findViewById<TextView>(R.id.txtCardApellidosCliente)
-        val txtCardDniCliente=view.findViewById<TextView>(R.id.txtCardDniCliente)
+        val txtCardNombreCliente=view.findViewById<TextView>(R.id.txtCardNombreTecnico)
+        val txtCardApellidosCliente=view.findViewById<TextView>(R.id.txtCardApellidosTecnico)
+        val txtCardDniCliente=view.findViewById<TextView>(R.id.txtCardMailTecnico)
 
         fun bind(listaClientes:ArrayList<Cliente>, contexto: Context,asignarClienteTarea: Boolean, pos:Int, AdaptadorClientes: AdaptadorClientes ){
             txtCardNombreCliente.text = listaClientes[pos].nombre
