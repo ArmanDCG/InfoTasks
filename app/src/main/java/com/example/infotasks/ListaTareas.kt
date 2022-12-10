@@ -61,6 +61,7 @@ class ListaTareas : Fragment() {
 
         btnAñadirTarea.setOnClickListener{
             val intentCrearTarea= Intent(contexto, CrearTarea::class.java )
+                .putExtra("accion", "crear")
             startActivity(intentCrearTarea)
         }
 

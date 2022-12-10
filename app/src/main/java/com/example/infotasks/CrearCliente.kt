@@ -11,6 +11,7 @@ import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Modelo.Cliente
 import com.example.infotasks.Utiles.Funcionales.toast
 import kotlinx.android.synthetic.main.activity_crear_cliente.*
+import kotlinx.android.synthetic.main.activity_crear_usuario.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -20,6 +21,11 @@ import java.lang.Exception
 
 class CrearCliente : AppCompatActivity() {
 
+    //Edición Cliente
+    private lateinit var clienteEditar:Cliente
+    private lateinit var accion:String
+
+    private lateinit var nuevoCliente:Cliente
     private lateinit var dni:String
     private lateinit var nombre:String
     private lateinit var apellidos:String
@@ -33,37 +39,84 @@ class CrearCliente : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_crear_usuario)
-        validacionCampos= HashMap()
+        setContentView(R.layout.activity_crear_cliente)
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        actionBar!!.title="Información Cliente"
+        validacionCampos= hashMapOf(true to 0, false to 0)
+
+        accion=intent.getStringExtra("accion") as String
+        comprobarAccion()
 
         btnCrearCliente.setOnClickListener {
-            var clienteCreado=false
-
-            Log.e("Resultado de validación de campos", validacionCampos.toString())
-
             if(obtenerDatos()){
-                var nuevoCliente=Cliente(dni, nombre, apellidos, Integer.parseInt(telefono), localidad, domicilio)
-                runBlocking {
-                    val job: Job = launch(context = Dispatchers.Default) {
-                    clienteCreado= FB.añadirCliente(nuevoCliente)
-                    }
-                    job.join()
-                }
-
-                if (clienteCreado) {
-                    toast(this, "Nuevo Cliente creado correctamente")
-                    var intent= Intent().putExtra("clienteAsigTarea",nuevoCliente )
-                    setResult(Activity.RESULT_OK, intent)
-                    finish()
-
-                }else {
-                    toast(this, "NO se pudo añadir el nuevo Cliente")
+                if (accion=="editar") {
+                    asignarAtributosEditados()
+                    guardarCliente(clienteEditar, true)
+                }else{
+                    asignarAtributosNuevos()
+                    guardarCliente(nuevoCliente, false)
                 }
             }
         }
         btnCancelarCrearCliente.setOnClickListener {
             finish()
         }
+    }
+
+
+
+    private fun guardarCliente(cliente: Cliente, editar:Boolean){
+        var addCliente=false
+        runBlocking {
+            val job: Job = launch(context = Dispatchers.Default) {
+                addCliente=FB.añadirCliente(cliente)
+            }
+            job.join()
+        }
+        if (addCliente && editar){
+            toast(this, "Cliente editado correctamente")
+            setResult(Activity.RESULT_OK, Intent().putExtra("clienteEditado", clienteEditar))
+        }else if (addCliente && !editar){
+            toast(this, "Nuevo Cliente creado correctamente")
+            var intent= Intent().putExtra("clienteAsigTarea",nuevoCliente )
+            setResult(Activity.RESULT_OK, intent)
+        }else
+            toast(this, "Hubo un error de conexión")
+        finish()
+    }
+
+    private fun asignarAtributosEditados() {
+        clienteEditar.let {
+            it.nombre=nombre
+            it.apellidos=apellidos
+            it.telefono=telefono.toInt()
+            it.localidad=localidad
+            it.domicilio=domicilio
+        }
+    }
+
+    private fun asignarAtributosNuevos(){
+        nuevoCliente= Cliente(dni, nombre, apellidos, Integer.parseInt(telefono), localidad, domicilio)
+    }
+
+    private fun comprobarAccion() {
+        if (accion=="editar") {
+            clienteEditar = intent.getSerializableExtra("cliente") as Cliente
+            mostrarCliente()
+        }
+    }
+
+    private fun mostrarCliente() {
+
+        txtCrearDniCliente.setText(clienteEditar.dni)
+        txtCrearNombreCliente.setText(clienteEditar.nombre)
+        txtCrearApellidosCliente.setText(clienteEditar.apellidos)
+        txtCrearTlfCliente.setText(clienteEditar.telefono.toString()!!)
+        txtCrearLocalidadCliente.setText(clienteEditar.localidad)
+        txtCrearDomicilioCliente.setText(clienteEditar.domicilio)
+
+        btnCrearCliente.text="Guardar"
+        txtCrearDniCliente.isEnabled=false
     }
 
     private fun obtenerDatos():Boolean{

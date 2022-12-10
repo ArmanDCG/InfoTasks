@@ -81,6 +81,19 @@ object FB {
         }
     }
 
+    //--Editar---------------------------------------------------------------------
+    suspend fun editarTarea(tarea: Tarea):Boolean{
+        return try {
+            db.collection("tareas")
+                .document(tarea.id!!)
+                .set(tarea)
+                .await()
+            true
+        }catch (ex:Exception){
+            Log.e("Error al editar Tarea", ex.localizedMessage)
+            false
+        }
+    }
     //--Obtener---------------------------------------------------------------------
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun obtenerTareas():ArrayList<Tarea>{

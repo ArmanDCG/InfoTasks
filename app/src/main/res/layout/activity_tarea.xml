@@ -23,15 +23,33 @@
                 android:background="@drawable/forma_vista_tarea_linear_layout"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtVistaTipoTarea"
-                    style="@style/textoIdentificarElemento"
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:text="Tipo"
-                    android:textSize="35dp" />
+                    android:gravity="left">
+
+                    <TextView
+                        android:id="@+id/txtVistaTipoTarea"
+                        style="@style/textoIdentificarElemento"
+                        android:layout_width="248dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="65dp"
+                        android:layout_marginTop="5dp"
+
+                        android:gravity="center"
+                        android:text="Tipo"
+                        android:textSize="35dp" />
+
+                    <ImageButton
+                        android:id="@+id/btnEditTarea"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/azulMarino"
+                        android:src="@drawable/edit" />
+                </LinearLayout>
 
 
                 <LinearLayout

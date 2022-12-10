@@ -42,6 +42,7 @@ class ListaClientes : Fragment()   {
 
         btnAddCliente.setOnClickListener {
             val intentAddCliente= Intent(contexto,CrearCliente::class.java )
+                .putExtra("accion", "crear")
             startActivity(intentAddCliente)
         }
 

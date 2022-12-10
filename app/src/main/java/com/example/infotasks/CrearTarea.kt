@@ -31,19 +31,25 @@ import kotlin.properties.Delegates
 class CrearTarea : AppCompatActivity() {
     private val REQUEST_CODE=1
 
+    //Solo en caso de editar
+    private lateinit var accion:String //Crear Tarea o Editar Tarea
+    private lateinit var tareaEditar: Tarea
+
+    private lateinit var nuevaTarea:Tarea
     private lateinit var descripcion:String
     private lateinit var tipo:TipoTarea
     private lateinit var prioridad:PrioridadTarea
     private lateinit var dniCliente:String
-    private var cliente: Cliente? = null
+    private var cliente: Cliente?=null
 
-
+    //Spinners
     private lateinit var listaTiposTarea:ArrayList<TipoTarea>
     private var posTipo by Delegates.notNull<Int>()
     private lateinit var listaPrioridadesTarea:ArrayList<PrioridadTarea>
     private var posPrioridad by Delegates.notNull<Int>()
 
     private lateinit var validacionCampos:HashMap<Boolean,Int>
+
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -59,6 +65,9 @@ class CrearTarea : AppCompatActivity() {
 
         validacionCampos= hashMapOf(true to 0, false to 0)
 
+        accion=intent.getStringExtra("accion") as String
+
+
         spinnerTipo.adapter=ArrayAdapter(this, R.layout.spinner_item,R.id.txtItem, listaTiposTarea)
         spinnerTipo.onItemSelectedListener= object :AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -71,8 +80,6 @@ class CrearTarea : AppCompatActivity() {
             }
 
         }
-
-        //spinnerPrioridad.adapter=ArrayAdapter(this, R.id.txtItem, listaPrioridadesTarea)
         spinnerPrioridad.adapter=ArrayAdapter(this, R.layout.spinner_item,R.id.txtItem, listaPrioridadesTarea )
         spinnerPrioridad.onItemSelectedListener= object :AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -85,12 +92,15 @@ class CrearTarea : AppCompatActivity() {
 
         }
 
+        comprobarAccion()
+
 
 
         btnAddCliNuevo.setOnClickListener {
             val intentAddCliente= Intent(this, CrearCliente::class.java)
             this.startActivityForResult(intentAddCliente,REQUEST_CODE)
         }
+
         btnBuscarCliente.setOnClickListener {
             val intentLCT=Intent(this, ListaClientesTarea::class.java)
             Log.e("REQUEST_CODE", REQUEST_CODE.toString())
@@ -98,33 +108,88 @@ class CrearTarea : AppCompatActivity() {
         }
 
         btnCrearTarea.setOnClickListener {
-            var añadido=false
+
             if(obtenerDatos()){
-                var nuevaTarea=Tarea()
-                nuevaTarea.descripcion=descripcion
-                nuevaTarea.tipo=tipo
-                nuevaTarea.prioridad=prioridad
-                nuevaTarea.idCliente=dniCliente
-                nuevaTarea.fechaCreacion=FechaHora.obtenerFechaActual()
-                nuevaTarea.fechaUltimaMod=FechaHora.obtenerFechaActual()
-                runBlocking {
-                    val job: Job = launch(context = Dispatchers.Default) {
-                        añadido=FB.añadirTarea(nuevaTarea)
-                    }
-                job.join()
+                if (accion=="editar")
+                {
+                    asignarAtributosEditados()
+                    guardarTarea(tareaEditar!!, true)
+                }else{
+                    asignarAtributosNuevos()
+                    guardarTarea(nuevaTarea, false)
                 }
-                if (añadido) {
-                    toast(this, "Tarea creada correctamente")
-                    finish()
-                }else
-                    toast(this, "Hubo un error al crear la nueva tarea")
+
             }
         }
 
         btnCancelarCrearTarea.setOnClickListener{finish()}
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun asignarAtributosNuevos() {
+        nuevaTarea=Tarea()
+        nuevaTarea.let {
+            it.descripcion=descripcion
+            it.tipo=tipo
+            it.prioridad=prioridad
+            it.idCliente=dniCliente
+            it.fechaCreacion=FechaHora.obtenerFechaActual()
+            it.fechaUltimaMod=FechaHora.obtenerFechaActual()
+        }
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun asignarAtributosEditados() {
+        tareaEditar.let {
+            it!!.descripcion=descripcion
+            it.prioridad=prioridad
+            it.fechaUltimaMod=FechaHora.obtenerFechaActual()
+        }
+    }
+
+    private fun guardarTarea(tarea:Tarea, editar:Boolean) {
+        var añadido=false
+        runBlocking {
+            val job: Job = launch(context = Dispatchers.Default) {
+                añadido = if (editar)
+                    FB.editarTarea(tarea)
+                else
+                    FB.añadirTarea(tarea)
+            }
+            job.join()
+        }
+        if (añadido && editar) {
+            toast(this, "Tarea editada correctamente")
+            setResult(RESULT_OK, Intent().putExtra("tareaEditar",tarea))
+        }else if (añadido && !editar) {
+            toast(this, "Tarea creada correctamente")
+        }else
+            toast(this, "Hubro un error conexión")
+
+        finish()
+    }
+
+    private fun comprobarAccion() {
+        if (accion=="editar") {
+            tareaEditar = intent.getSerializableExtra("tarea") as Tarea
+            cliente = intent.getSerializableExtra("cliente") as Cliente
+
+            btnCrearTarea.text="Guardar"
+            mostrarTarea()
+        }
+    }
+
+    private fun mostrarTarea() {
+        txtCrearDescTarea.setText(tareaEditar!!.descripcion)
+        spinnerTipo.setSelection(listaTiposTarea.indexOf(tareaEditar!!.tipo ))
+        spinnerPrioridad.setSelection(listaPrioridadesTarea.indexOf(tareaEditar!!.prioridad))
+        establecerNombreCliente("${cliente!!.nombre}, ${cliente!!.apellidos}")
+        //Deshabilitar elemenos que no se puden editar
+        btnAddCliNuevo.isEnabled=false
+        spinnerTipo.isEnabled=false
+        btnBuscarCliente.isEnabled=false
+
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -132,8 +197,12 @@ class CrearTarea : AppCompatActivity() {
             cliente= data?.getSerializableExtra("clienteAsigTarea",) as Cliente
             Log.e("Cliente elegido", cliente.toString())
             if (cliente!=null)
-                txtCrearNomClienteTarea.text="${cliente!!.nombre}, ${cliente!!.apellidos}"
+                establecerNombreCliente("${cliente!!.nombre}, ${cliente!!.apellidos}")
         }
+    }
+
+    private fun establecerNombreCliente(nombreCliente:String) {
+        txtCrearNomClienteTarea.text=nombreCliente
     }
 
     private fun obtenerDatos(): Boolean {

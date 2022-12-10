@@ -21,7 +21,7 @@ import kotlinx.coroutines.runBlocking
 import java.lang.Exception
 
 class TareaActivity : AppCompatActivity() {
-
+    private val REQUEST_CODE=1
     private lateinit var tarea: Tarea
     private  lateinit var cliente: Cliente
 
@@ -31,9 +31,18 @@ class TareaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tarea)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.title="Descripción Tarea"
 
         obtenerFunteDatos()
         mostrarDatos()
+
+        btnEditTarea.setOnClickListener {
+            var intentTarea=Intent(this, CrearTarea::class.java)
+                .putExtra("tarea", tarea)
+                .putExtra("accion", "editar")
+                .putExtra("cliente", cliente)
+            startActivityForResult(intentTarea, REQUEST_CODE)
+        }
 
         btnAbrirGoogleMaps.setOnClickListener {
             try {
@@ -52,6 +61,15 @@ class TareaActivity : AppCompatActivity() {
             android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==REQUEST_CODE && resultCode == RESULT_OK){
+            tarea=data?.getSerializableExtra("tareaEditar") as Tarea
+            mostrarDatos()
+        }
     }
 
     private fun obtenerFunteDatos() {
