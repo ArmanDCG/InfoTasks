@@ -27,7 +27,7 @@ object ConversorQueryAModelo {
      * Metodo para convertir una Query de un usuario a un modelo Usuario
      */
     fun queryAUsuario(dato: QueryDocumentSnapshot?): Usuario {
-        Log.e("UserLoger", dato.toString())
+
         return Usuario(
             dato!!.get("mail").toString(),
             dato.get("nombre").toString(),
@@ -44,7 +44,6 @@ object ConversorQueryAModelo {
                 usuarios.add(queryAUsuario(dc.document))
             }
         }
-        Log.e("Usuarios", usuarios.toString())
         return usuarios
     }
 
@@ -66,7 +65,7 @@ object ConversorQueryAModelo {
                         dc.document.get("idCliente").toString(),
                     )
                 )
-                Log.e("Tarea desglosada", tareas.last().toString())
+
 
                  
             }

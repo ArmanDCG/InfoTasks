@@ -21,7 +21,6 @@ class ClienteActivity : AppCompatActivity() {
         supportActionBar!!.title="Descripción Cliente"
 
         cliente=intent.getSerializableExtra("cliente") as Cliente
-        Log.e("Vista cliente", cliente.toString())
         mostrarDatos()
 
         btnEditCliente.setOnClickListener {

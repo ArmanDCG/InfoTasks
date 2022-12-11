@@ -277,27 +277,22 @@ class ListaTareas(var rol:RolUsuario=RolUsuario.ADMINISTRADOR) : Fragment() {
             if (it != btn){
                 when(it){
                     btnOrdPrioridad->{
-                        Log.e("btn", "Prioridad")
                         numPrioridad=0
                         btnOrdPrioridad.text="Prioridad"
                     }
                     btnOrdTipo->{
-                        Log.e("btn", "Tipo")
                         numTipo=0
                         btnOrdTipo.text="Tipo"
                     }
                     btnOrdEstado->{
-                        Log.e("btn", "Estado")
                         numEstado=0
                         btnOrdEstado.text="Estado"
                     }
                     btnOrdFechCreacion->{
-                        Log.e("btn", "creación")
                         numFechaCreacion=1
                         btnOrdFechCreacion.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
                     }
                     btnOrdUltimaMod->{
-                        Log.e("btn", "modificación")
                         btnOrdUltimaMod.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
                         numFechaUltimaMod=0
                     }

@@ -73,7 +73,6 @@ class Acceso : AppCompatActivity() {
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
                 usuario = FB.obtenerUsuario(mail)
-                Log.e("usuario", usuario.toString())
             }
             job.join()
         }

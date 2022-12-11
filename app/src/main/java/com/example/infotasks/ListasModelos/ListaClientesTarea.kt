@@ -42,7 +42,6 @@ class ListaClientesTarea : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        Log.e("ListaClientes", "abierta")
         obtenerListaClientes()
         lanzarAdaptador()
     }

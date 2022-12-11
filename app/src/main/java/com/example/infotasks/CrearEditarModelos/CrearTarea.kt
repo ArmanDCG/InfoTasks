@@ -207,7 +207,6 @@ class CrearTarea : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode== Activity.RESULT_OK && requestCode==REQUEST_CODE){
             cliente= data?.getSerializableExtra("clienteAsigTarea",) as Cliente
-            Log.e("Cliente elegido", cliente.toString())
             if (cliente!=null)
                 establecerNombreCliente("${cliente!!.nombre}, ${cliente!!.apellidos}")
         }
@@ -223,8 +222,6 @@ class CrearTarea : AppCompatActivity() {
         validacionCampos[validarCliente()]=+1
         tipo=listaTiposTarea[posTipo]
         prioridad=listaPrioridadesTarea[posPrioridad]
-
-        Log.e("Validar crear tarea" ,validacionCampos.toString())
 
         return (validacionCampos[false]==0)
     }
