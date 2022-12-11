@@ -36,13 +36,8 @@ class Acceso : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acceso)
 
-        supportActionBar!!.hide()
+        supportActionBar?.hide()
 
-        txtID.setText("user1@infotasks.com")
-        txtPass.setText("usuario1")
-
-        //txtID.setText("admin@infotasks.com")
-        //txtPass.setText("administrador")
 
         btnAcceder.setOnClickListener {
             if (obtenerCampos()) {
