@@ -2,6 +2,7 @@ package com.example.infotasks
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.infotasks.Constantes.RolUsuario
 import com.example.infotasks.ListasModelos.ListaClientes
@@ -23,6 +24,7 @@ class Administrador : AppCompatActivity() {
         setContentView(R.layout.activity_administrador)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title="Administrador"
 
         listaTareas= ListaTareas(RolUsuario.ADMINISTRADOR)
         listaClientes= ListaClientes()
@@ -37,6 +39,12 @@ class Administrador : AppCompatActivity() {
             return@setOnItemSelectedListener true
         }
 
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home-> finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun cambiarFragment(fragment: Fragment){

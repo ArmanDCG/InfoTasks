@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.EditText
 import androidx.annotation.RequiresApi
 import com.example.infotask.ConexionBD.FB
+import com.example.infotasks.Constantes.EstadoTarea
 import com.example.infotasks.Constantes.RolUsuario
 import com.example.infotasks.CrearEditarModelos.CrearTarea
 import com.example.infotasks.Modelo.Cliente
@@ -24,14 +25,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.lang.Exception
-
+@RequiresApi(Build.VERSION_CODES.O)
 class TareaActivity : AppCompatActivity() {
     private val REQUEST_CODE=1
     private lateinit var tarea: Tarea
     private  lateinit var cliente: Cliente
     private lateinit var rol:RolUsuario
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tarea)
@@ -43,6 +44,7 @@ class TareaActivity : AppCompatActivity() {
         mostrarDatos()
         comprobarRol()
 
+        //Buttons/////
         btnEditTarea.setOnClickListener {
             var intentTarea=Intent(this, CrearTarea::class.java)
                 .putExtra("tarea", tarea)
@@ -62,28 +64,44 @@ class TareaActivity : AppCompatActivity() {
             }
         }
 
-        //btnCerrarTarea.setOnClickListener{
-          //  guardarTarea()
-        //}
+        btnCerrarTarea.setOnClickListener{
+                tarea.estado=EstadoTarea.REALIZADA
+                tarea.fechaUltimaMod=FechaHora.obtenerFechaActual()
+                if(guardarTarea()) {
+                    it.visibility = View.GONE
+                    txtVistaEstadoTarea.text= EstadoTarea.REALIZADA.toString()
+                }
+
+        }
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             android.R.id.home -> {
-
-                if (rol==RolUsuario.TECNICO && txtVistaObservacionesTarea.text.toString() != tarea.observaciones) {
-                   guardarCamposEditados()
-                    guardarTarea()
-                }
-                finish()
+                salirInterfaz()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        salirInterfaz()
+    }
+
+
+    private fun salirInterfaz() {
+        if (rol==RolUsuario.TECNICO) {
+            if(asignarCamposEditados()) guardarTarea()
+        }
+        finish()
+    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==REQUEST_CODE && resultCode == RESULT_OK){
@@ -92,26 +110,32 @@ class TareaActivity : AppCompatActivity() {
         }
     }
 
-    private fun guardarTarea(){
+    private fun guardarTarea():Boolean{
+        var guardar=false
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
-                FB.editarTarea(tarea)
+               guardar=FB.editarTarea(tarea)
             }
             job.join()
         }
+        return guardar
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun guardarCamposEditados(){
+
+    private fun asignarCamposEditados():Boolean{
         var observaciones=txtVistaObservacionesTarea.text.toString()
-        tarea.observaciones = observaciones
-        tarea.fechaUltimaMod = FechaHora.obtenerFechaActual()
+        return if( observaciones != tarea.observaciones) {
+                tarea.observaciones = observaciones
+                tarea.fechaUltimaMod = FechaHora.obtenerFechaActual()
+                true
+            }else
+                false
+
     }
 
     private fun obtenerFunteDatos() {
         tarea=intent.getSerializableExtra("tarea") as Tarea
         rol=intent.getSerializableExtra("rol") as RolUsuario
-
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
                 cliente= FB.obtenerCliente(tarea.idCliente!!)!!
@@ -134,14 +158,14 @@ class TareaActivity : AppCompatActivity() {
     private fun mostrarDatos() {
         //Tarea
         txtVistaTipoTarea.text=tarea.tipo.toString()
-        txtVistaDescTarea.text=tarea.descripcion
-        if (tarea.observaciones!=null)
-            txtVistaObservacionesTarea.setText(tarea.observaciones)
-
+        txtVistaDescTarea.text = tarea.descripcion
+        if (tarea.observaciones!=null) txtVistaObservacionesTarea.setText(tarea.observaciones)
         txtVistaPrioridadTarea.text=tarea.prioridad.toString()
         txtVistaEstadoTarea.text=tarea.estado.toString()
         txtVistaFechaCreacionTarea.text=FechaHora.dateToString(tarea.fechaCreacion!!)
         txtVistaFechaUltimaModTarea.text=FechaHora.dateToString(tarea.fechaUltimaMod!!)
+        if (tarea.estado==EstadoTarea.REALIZADA) btnCerrarTarea.visibility=View.GONE
+
         //Cliente
         txtVistaDniCliTarea.text=cliente.dni
         txtVistaNombreCliTarea.text=cliente.nombre

@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -100,6 +101,7 @@ class CrearTarea : AppCompatActivity() {
 
         btnAddCliNuevo.setOnClickListener {
             val intentAddCliente= Intent(this, CrearCliente::class.java)
+                .putExtra("accion", "crear")
             this.startActivityForResult(intentAddCliente,REQUEST_CODE)
         }
 
@@ -124,7 +126,14 @@ class CrearTarea : AppCompatActivity() {
             }
         }
 
-        btnCancelarCrearTarea.setOnClickListener{finish()}
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home-> finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

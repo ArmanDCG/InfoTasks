@@ -79,12 +79,14 @@ class ListaTareas(var rol:RolUsuario=RolUsuario.ADMINISTRADOR) : Fragment() {
             when(numPrioridad){
                 0->{
                     obtenerTareasPorDefecto()
+                    btnOrdPrioridad.text="Prioridad"
 
                 }
                 1->{
                     obtenerTareasPorPrioridad(PrioridadTarea.BAJA.toString())
                     btnOrdPrioridad.text="Prioridad\nBaja"
                     filtrosPorDefecto(btnOrdPrioridad)
+
                 }
                 2->{
                     obtenerTareasPorPrioridad(PrioridadTarea.MEDIA.toString())
@@ -103,11 +105,13 @@ class ListaTareas(var rol:RolUsuario=RolUsuario.ADMINISTRADOR) : Fragment() {
             when(numTipo){
                 0->{
                     obtenerTareasPorDefecto()
+                    btnOrdTipo.text="Tipo"
                 }
                 1->{
                     obtenerTareasPorTipo(TipoTarea.INCIDENCIA.toString())
                     btnOrdTipo.text="Tipo\nIncidencia"
                     filtrosPorDefecto(btnOrdTipo)
+
                 }
                 2->{
                     obtenerTareasPorTipo(TipoTarea.INSTALACION.toString())
@@ -123,11 +127,14 @@ class ListaTareas(var rol:RolUsuario=RolUsuario.ADMINISTRADOR) : Fragment() {
             when(numEstado){
                 0->{
                      obtenerTareasPorDefecto()
+                    btnOrdEstado.text="Estado"
+
                 }
                 1->{
                     obtenerTareasPorEstado(EstadoTarea.PENDIENTE.toString())
                     btnOrdEstado.text="Estado\nPendiente"
                     filtrosPorDefecto(btnOrdEstado)
+
                 }
                 2->{
                     obtenerTareasPorEstado(EstadoTarea.REALIZADA.toString())
@@ -136,6 +143,7 @@ class ListaTareas(var rol:RolUsuario=RolUsuario.ADMINISTRADOR) : Fragment() {
 
                 }
             }
+
         }
         btnOrdFechCreacion.setOnClickListener {
             //Por defecto Descendente
@@ -147,13 +155,14 @@ class ListaTareas(var rol:RolUsuario=RolUsuario.ADMINISTRADOR) : Fragment() {
                     obtenerTareasPorFecha(Query.Direction.DESCENDING)
                     icono= requireContext().resources?.getDrawable(R.drawable.menor_primero)!!
                     btnOrdFechCreacion.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, icono, null)
+                    filtrosPorDefecto(btnOrdFechCreacion)
                 }
                 2->{
                     obtenerTareasPorFecha(Query.Direction.ASCENDING)
                     icono= requireContext().resources?.getDrawable(R.drawable.mayor_primero)!!
                     btnOrdFechCreacion.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, icono, null)
                     numFechaCreacion=0
-                    filtrosPorDefecto(btnOrdFechCreacion)
+
                 }
             }
         }
@@ -165,12 +174,14 @@ class ListaTareas(var rol:RolUsuario=RolUsuario.ADMINISTRADOR) : Fragment() {
                 0->{
                     obtenerTareasPorDefecto()
                     btnOrdUltimaMod.setCompoundDrawables(null, null, null, null)
+
                 }
                 1->{
                     obtenerTareasPorFecha(Query.Direction.DESCENDING)
                     icono= contexto.resources?.getDrawable(R.drawable.menor_primero)!!
                     btnOrdUltimaMod.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null,icono, null)
                     filtrosPorDefecto(btnOrdUltimaMod)
+
                 }
                 2->{
                     obtenerTareasPorFecha(Query.Direction.ASCENDING)

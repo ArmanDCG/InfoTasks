@@ -4,50 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Acceso"
-    android:orientation="vertical"
-    android:gravity="center">
+    tools:context=".Acceso">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="top|center"
+        android:background="@drawable/acceso_background">
 
-    <EditText
-        android:id="@+id/txtID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="12"
-        android:hint="Mail"
-        android:inputType="textPersonName"
-        android:background="@drawable/border_input_text" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_marginTop="90dp"
+            android:layout_marginBottom="100dp"
+            android:textSize="50dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/turquesaPuro"
+            android:fontFamily="sans-serif-smallcaps"/>
 
-    <TextView
-        style="@style/textoError"
-        android:id="@+id/txtErrorMailAcceso"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="45dp"
-        android:layout_marginBottom="20dp"
-        android:text="error" />
+        <EditText
+            android:id="@+id/txtID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="12"
+            android:hint="Mail"
+            android:inputType="textPersonName"
+            android:background="@drawable/border_input_text" />
 
-    <EditText
-        android:id="@+id/txtPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="12"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:background="@drawable/border_input_text"/>
-    <TextView
-        style="@style/textoError"
-        android:id="@+id/txtErrorPassAcceso"
-        android:layout_width="152dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="45dp"
-        android:layout_marginBottom="20dp"
-        android:text="error" />
+        <TextView
+            style="@style/textoError"
+            android:id="@+id/txtErrorMailAcceso"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="45dp"
+            android:layout_marginBottom="20dp"
+            android:text="error" />
 
-    <Button
-        android:id="@+id/btnAcceder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Acceder" />
+        <EditText
+            android:id="@+id/txtPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="12"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:background="@drawable/border_input_text"/>
+        <TextView
+            style="@style/textoError"
+            android:id="@+id/txtErrorPassAcceso"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="45dp"
+            android:layout_marginBottom="20dp"
+            android:text="error" />
+
+        <Button
+            android:id="@+id/btnAcceder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Acceder" />
+    </LinearLayout>
+
 </LinearLayout>

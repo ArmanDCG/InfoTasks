@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"
-            android:text="Cliente"
+            android:text="Usuario"
             android:textSize="35dp" />
         <ImageButton
             android:id="@+id/btnEditUsuario"

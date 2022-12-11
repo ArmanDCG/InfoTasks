@@ -11,7 +11,6 @@ import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 object FechaHora {
-    private const val SEPARADOR=';'
     private const val ZONE_ID="Europe/Madrid"
     private const val FORMATO_DATE= "dd/MM/yyyy HH:mm"
     private lateinit var fechaActual:ZonedDateTime

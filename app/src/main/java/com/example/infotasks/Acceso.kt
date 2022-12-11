@@ -21,7 +21,7 @@ import kotlin.properties.Delegates
 
 
 class Acceso : AppCompatActivity() {
-    private var credencialesCorrectas by Delegates.notNull<Boolean>()
+
     private lateinit var mail:String
     private lateinit var pass:String
     private var usuario:Usuario? = null
@@ -46,28 +46,35 @@ class Acceso : AppCompatActivity() {
 
         btnAcceder.setOnClickListener {
             if (obtenerCampos()) {
-                runBlocking {
-                    val job: Job = launch(context = Dispatchers.Default) {
-                        credencialesCorrectas = FB.autenticar(mail, pass)
-                    }
-                    job.join()
-                }
-                if (credencialesCorrectas) {
-                    comprobarRol()
+
+                if (autenticar()) {
+                    comprobarUsuario()
                 } else {
                     toast(this, "Credenciales incorrectas")
                 }
 
-            }else{
-                toast(this, "Todos los campos son obligatorios")
             }
         }
 
-
-
     }
 
-    private fun comprobarRol() {
+    override fun onStart() {
+        super.onStart()
+        txtID.setText("")
+        txtPass.setText("")
+    }
+
+    private fun autenticar(): Boolean {
+        var credencialesCorrectas=false
+        runBlocking {
+            val job: Job = launch(context = Dispatchers.Default) {
+                credencialesCorrectas = FB.autenticar(mail, pass)
+            }
+            job.join()
+        }
+        return credencialesCorrectas
+    }
+    fun comprobarUsuario(){
         runBlocking {
             val job: Job = launch(context = Dispatchers.Default) {
                 usuario = FB.obtenerUsuario(mail)
@@ -75,11 +82,19 @@ class Acceso : AppCompatActivity() {
             }
             job.join()
         }
+        if(comprobarActivo()) comprobarRol()
+    }
 
-        if (usuario!!.rol == RolUsuario.ADMINISTRADOR )
-            lanzarVentanaAdmin()
-        else
-            lanzarVentanaTecnico()
+    private fun comprobarActivo(): Boolean { return usuario!!.activo }
+
+    private fun comprobarRol() {
+
+        if (usuario!=null) {
+            if (usuario!!.rol == RolUsuario.ADMINISTRADOR)
+                lanzarVentanaAdmin()
+            else
+                lanzarVentanaTecnico()
+        }
     }
 
     private fun lanzarVentanaTecnico() {
@@ -102,11 +117,15 @@ class Acceso : AppCompatActivity() {
         return validarCampos[false]==0
     }
     private fun validarMail():Boolean {
+        val dominio="infotasks.com"
         mail=txtID.text.toString().trim()
         return if (mail.isEmpty()) {
-            mostrarError(txtErrorMailAcceso)
+            mostrarError(txtErrorMailAcceso, false)
             false
-        }else {
+        }else if(mail.length <= dominio.length) {
+            mostrarError(txtErrorMailAcceso, true)
+            false
+        }else{
             ocultarError(txtErrorMailAcceso)
             true
         }
@@ -114,7 +133,7 @@ class Acceso : AppCompatActivity() {
     private fun validarContraseña():Boolean {
         pass=txtPass.text.toString().trim()
         return if(pass.isEmpty()) {
-            mostrarError(txtErrorPassAcceso)
+            mostrarError(txtErrorPassAcceso, false)
             false
         } else {
             ocultarError(txtErrorPassAcceso)
@@ -122,7 +141,9 @@ class Acceso : AppCompatActivity() {
         }
     }
 
-    private fun mostrarError(textView: TextView){
+    private fun mostrarError(textView: TextView, errorFormato:Boolean){
+        if (errorFormato)
+            textView.text="*Error de formato"
         textView.visibility = View.VISIBLE
     }
 

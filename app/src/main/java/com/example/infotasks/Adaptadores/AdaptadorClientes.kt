@@ -98,7 +98,7 @@ class AdaptadorClientes(var contexto:Context, var clientes:ArrayList<Cliente>, v
             itemView.setOnLongClickListener {
                 if(!asignarClienteTarea) {
                     val dialog = AlertDialog.Builder(contexto)
-                        .setMessage("¿Deseas borrar el cliente?")
+                        .setMessage("¿Deseas borrar el cliente?\nSe borraran toda la actividad asociada al cliente.")
                         .setCancelable(false)
                         .setTitle("Borrar Cliente")
                         .setPositiveButton("Aceptar") { _, _ ->
@@ -112,7 +112,7 @@ class AdaptadorClientes(var contexto:Context, var clientes:ArrayList<Cliente>, v
                             if (borrado) {
                                 listaClientes.remove(listaClientes[pos])
                                 AdaptadorClientes.notifyDataSetChanged()
-                                toast(contexto, "Tarea borrada correctamente")
+                                toast(contexto, "Cliente borrada correctamente")
                             }
                         }.setNegativeButton("Cancelar") { _, _ -> }
                         .create().show()

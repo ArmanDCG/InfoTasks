@@ -24,7 +24,6 @@ import kotlinx.coroutines.runBlocking
 class ListaClientes : Fragment()   {
     private lateinit var adaptadorClientes: AdaptadorClientes
     private lateinit var clientes:ArrayList<Cliente>
-    private lateinit var listaClientesFiltrado:ArrayList<Cliente>
     private lateinit var contexto: Context
 
 
@@ -73,8 +72,6 @@ class ListaClientes : Fragment()   {
             }
             job.join()
         }
-        listaClientesFiltrado=clientes
-
     }
 
     private fun lanzarAdaptador(){

@@ -232,10 +232,11 @@ object FB {
 
     suspend fun borrarCliente(idCliente:String):Boolean{
         return try {
-            db.collection("tareas")
+            db.collection("clientes")
                 .document(idCliente)
                 .delete()
                 .await()
+            borrarTareasDeCliente(idCliente)
             true
         }catch (ex:Exception){
             Log.e("No se pudo borrar las tareas asosciadas al cliente", ex.localizedMessage)

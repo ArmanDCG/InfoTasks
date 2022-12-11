@@ -17,7 +17,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="558dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/forma_vista_tarea_linear_layout"
@@ -154,7 +154,8 @@
                     android:layout_marginTop="5dp"
                     android:background="@color/white"
                     android:paddingLeft="3dp"
-                    android:text="texto,texto,texto,texto"
+                    android:text=""
+                    android:textColor="@color/black"
                     android:textSize="16dp" />
 
                 <TextView
@@ -171,12 +172,20 @@
                     android:layout_height="132dp"
                     android:layout_gravity="left"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@color/white"
+                    android:gravity="start"
                     android:paddingLeft="3dp"
-                    android:text="texto,texto,texto,texto"
+                    android:text=""
                     android:textSize="16dp"
-                    android:gravity="start" />
+                    android:textColor="@color/black" />
 
+                <Button
+                    android:id="@+id/btnCerrarTarea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cerrar Tarea"
+                    android:layout_marginBottom="10dp"/>
 
 
             </LinearLayout>
