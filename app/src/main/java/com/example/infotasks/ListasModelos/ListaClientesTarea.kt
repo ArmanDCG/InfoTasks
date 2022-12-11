@@ -1,17 +1,15 @@
-package com.example.infotasks
+package com.example.infotasks.ListasModelos
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Adaptadores.AdaptadorClientes
 import com.example.infotasks.Modelo.Cliente
+import com.example.infotasks.R
 import kotlinx.android.synthetic.main.activity_lista_clientes.*
-import kotlinx.android.synthetic.main.activity_lista_clientes.view.*
-import kotlinx.android.synthetic.main.activity_lista_clientes_tarea.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch

@@ -1,7 +1,6 @@
 package com.example.infotasks.Adaptadores
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -15,13 +14,11 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infotask.ConexionBD.FB
-import com.example.infotasks.ClienteActivity
-import com.example.infotasks.CrearUsuario
-import com.example.infotasks.ListaClientes
-import com.example.infotasks.Modelo.Cliente
+import com.example.infotasks.CrearEditarModelos.CrearUsuario
 import com.example.infotasks.Modelo.Usuario
 import com.example.infotasks.R
 import com.example.infotasks.Utiles.Funcionales.toast
+import com.example.infotasks.VistaModelos.UsuarioActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -85,15 +82,15 @@ class AdaptadorUsuarios(var contexto:Context, var usuarios:ArrayList<Usuario>): 
 
             itemView.setOnClickListener {
 
-                    val intentTarea = Intent(contexto, CrearUsuario::class.java)
-                        .putExtra("cliente", listaUsuarios[pos])
+                    val intentTarea = Intent(contexto, UsuarioActivity::class.java)
+                        .putExtra("usuario", listaUsuarios[pos])
 
                     contexto.startActivity(intentTarea)
 
             }
 
             itemView.setOnLongClickListener {
-
+                /*
                     val dialog = AlertDialog.Builder(contexto)
                         .setMessage("¿Deseas borrar el usuario?")
                         .setCancelable(false)
@@ -114,8 +111,12 @@ class AdaptadorUsuarios(var contexto:Context, var usuarios:ArrayList<Usuario>): 
                         }.setNegativeButton("Cancelar") { _, _ -> }
                         .create().show()
 
+                 */
+
                 return@setOnLongClickListener true
             }
+
+
         }
     }
 

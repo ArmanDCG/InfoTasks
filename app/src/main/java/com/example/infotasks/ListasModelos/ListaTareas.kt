@@ -1,4 +1,4 @@
-package com.example.infotasks
+package com.example.infotasks.ListasModelos
 
 import android.content.Context
 import android.content.Intent
@@ -17,8 +17,11 @@ import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Adaptadores.AdaptadorTareas
 import com.example.infotasks.Constantes.EstadoTarea
 import com.example.infotasks.Constantes.PrioridadTarea
+import com.example.infotasks.Constantes.RolUsuario
 import com.example.infotasks.Constantes.TipoTarea
+import com.example.infotasks.CrearEditarModelos.CrearTarea
 import com.example.infotasks.Modelo.Tarea
+import com.example.infotasks.R
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_lista_tareas.*
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +29,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class ListaTareas : Fragment() {
+class ListaTareas(var rol:RolUsuario=RolUsuario.ADMINISTRADOR) : Fragment() {
+
     private lateinit var adaptadorTareas:AdaptadorTareas
     private lateinit var tareas:ArrayList<Tarea>
 
@@ -55,6 +59,9 @@ class ListaTareas : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (rol==RolUsuario.TECNICO)
+            btnAñadirTarea.visibility=View.GONE
 
         contexto=this.requireActivity()
 
@@ -189,7 +196,7 @@ class ListaTareas : Fragment() {
     private fun lanzarAdaptador(){
         recyclerTareas.setHasFixedSize(true)
         recyclerTareas.layoutManager = LinearLayoutManager(contexto)
-        adaptadorTareas = AdaptadorTareas(contexto, tareas )
+        adaptadorTareas = AdaptadorTareas(contexto, tareas, rol )
         recyclerTareas.adapter=adaptadorTareas
     }
 

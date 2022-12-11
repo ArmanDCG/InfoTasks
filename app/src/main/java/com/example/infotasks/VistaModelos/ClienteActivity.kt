@@ -1,14 +1,14 @@
-package com.example.infotasks
+package com.example.infotasks.VistaModelos
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
+import com.example.infotasks.CrearEditarModelos.CrearCliente
 import com.example.infotasks.Modelo.Cliente
+import com.example.infotasks.R
 import kotlinx.android.synthetic.main.activity_cliente.*
-import kotlinx.android.synthetic.main.activity_tarea.*
-import kotlinx.android.synthetic.main.activity_tarea.txtVistaNombreCliTarea
-import java.io.Serializable
 
 class ClienteActivity : AppCompatActivity() {
     private val REQUEST_CODE=1
@@ -16,6 +16,9 @@ class ClienteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cliente)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.title="Descripción Cliente"
 
         cliente=intent.getSerializableExtra("cliente") as Cliente
         Log.e("Vista cliente", cliente.toString())
@@ -35,6 +38,12 @@ class ClienteActivity : AppCompatActivity() {
             cliente=data?.getSerializableExtra("clienteEditado") as Cliente
             mostrarDatos()
         }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home-> finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun mostrarDatos() {

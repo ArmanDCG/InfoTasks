@@ -15,7 +15,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.infotask.ConexionBD.FB
-import com.example.infotasks.ClienteActivity
+import com.example.infotasks.VistaModelos.ClienteActivity
 import com.example.infotasks.Modelo.Cliente
 import com.example.infotasks.R
 import com.example.infotasks.Utiles.Funcionales.toast

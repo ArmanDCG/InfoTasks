@@ -1,17 +1,16 @@
-package com.example.infotasks
+package com.example.infotasks.CrearEditarModelos
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Modelo.Cliente
+import com.example.infotasks.R
 import com.example.infotasks.Utiles.Funcionales.toast
 import kotlinx.android.synthetic.main.activity_crear_cliente.*
-import kotlinx.android.synthetic.main.activity_crear_usuario.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -41,8 +40,8 @@ class CrearCliente : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_cliente)
         actionBar!!.setDisplayHomeAsUpEnabled(true)
-        actionBar!!.title="Información Cliente"
-        validacionCampos= hashMapOf(true to 0, false to 0)
+        actionBar!!.title="Crear"
+
 
         accion=intent.getStringExtra("accion") as String
         comprobarAccion()
@@ -101,6 +100,7 @@ class CrearCliente : AppCompatActivity() {
 
     private fun comprobarAccion() {
         if (accion=="editar") {
+            actionBar!!.title="Editar"
             clienteEditar = intent.getSerializableExtra("cliente") as Cliente
             mostrarCliente()
         }
@@ -120,6 +120,7 @@ class CrearCliente : AppCompatActivity() {
     }
 
     private fun obtenerDatos():Boolean{
+        validacionCampos= hashMapOf(true to 0, false to 0)
         validacionCampos[validarDni()]=+1
         validacionCampos[validarNombre()]=+1
         validacionCampos[validarApellidos()]=+1

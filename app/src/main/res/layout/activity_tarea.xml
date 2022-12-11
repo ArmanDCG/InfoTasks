@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TareaActivity"
+    tools:context=".VistaModelos.TareaActivity"
     android:orientation="vertical"
     android:layout_margin="10dp">
     <ScrollView
@@ -165,7 +165,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Observaciónes de Tecnicos encargados:" />
 
-                <TextView
+                <EditText
                     android:id="@+id/txtVistaObservacionesTarea"
                     android:layout_width="match_parent"
                     android:layout_height="132dp"
@@ -174,7 +174,9 @@
                     android:background="@color/white"
                     android:paddingLeft="3dp"
                     android:text="texto,texto,texto,texto"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:gravity="start" />
+
 
 
             </LinearLayout>

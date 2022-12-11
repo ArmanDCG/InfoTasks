@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VistaModelos.ClienteActivity"
+    tools:context=".VistaModelos.UsuarioActivity"
     android:orientation="vertical"
-    android:background="@drawable/forma_vista_cliente_linear_layout">
+    android:paddingTop="20dp"
+    android:background="@drawable/forma_vista_usuario_linear_layout">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +23,7 @@
             android:text="Cliente"
             android:textSize="35dp" />
         <ImageButton
-            android:id="@+id/btnEditCliente"
+            android:id="@+id/btnEditUsuario"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginLeft="85dp"
@@ -41,10 +42,10 @@
             style="@style/textoIdentificarElemento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DNI:" />
+            android:text="Mail:" />
 
         <TextView
-            android:id="@+id/txtVistaDniCliente"
+            android:id="@+id/txtVistaMailUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -65,7 +66,7 @@
             android:text="Nombre:" />
 
         <TextView
-            android:id="@+id/txtVistaNombreCliente"
+            android:id="@+id/txtVistaNombreUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -86,7 +87,7 @@
             android:text="Apellidos:" />
 
         <TextView
-            android:id="@+id/txtVistaApellidosCliente"
+            android:id="@+id/txtVistaApellidosUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -107,7 +108,7 @@
             android:text="Teléfono:" />
 
         <TextView
-            android:id="@+id/txtVistaTlfCliente"
+            android:id="@+id/txtVistaTlfUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -124,15 +125,15 @@
         <TextView
             style="@style/textoIdentificarElemento"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Localidad:" />
+            android:layout_height="match_parent"
+            android:text="Rol:" />
 
         <TextView
-            android:id="@+id/txtVistaLocalidadCliente"
+            android:id="@+id/txtVistaRolUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="localidad"
+            android:text="rol"
             android:textSize="16dp" />
     </LinearLayout>
 
@@ -145,15 +146,15 @@
         <TextView
             style="@style/textoIdentificarElemento"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Domicilio:" />
+            android:layout_height="match_parent"
+            android:text="Activo:" />
 
         <TextView
-            android:id="@+id/txtVistaDomicilioCliente"
+            android:id="@+id/txtVistaActivoUsuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="domicilio"
+            android:text="activo"
             android:textSize="16dp" />
     </LinearLayout>
 

@@ -3,6 +3,10 @@ package com.example.infotasks
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.infotasks.Constantes.RolUsuario
+import com.example.infotasks.ListasModelos.ListaClientes
+import com.example.infotasks.ListasModelos.ListaTareas
+import com.example.infotasks.ListasModelos.ListaUsuarios
 import com.example.infotasks.Modelo.Usuario
 import kotlinx.android.synthetic.main.activity_administrador.*
 
@@ -20,9 +24,9 @@ class Administrador : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        listaTareas=ListaTareas()
-        listaClientes=ListaClientes()
-        listaTecnicos=ListaUsuarios()
+        listaTareas= ListaTareas(RolUsuario.ADMINISTRADOR)
+        listaClientes= ListaClientes()
+        listaTecnicos= ListaUsuarios()
 
         navigation_menu.setOnItemSelectedListener {
             when(it.itemId){

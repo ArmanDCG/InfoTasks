@@ -4,9 +4,12 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Constantes.RolUsuario
+import com.example.infotasks.ListasModelos.ListaTareas
 import com.example.infotasks.Modelo.Usuario
 import com.example.infotasks.Utiles.Funcionales.toast
 import kotlinx.android.synthetic.main.acceso.*
@@ -23,6 +26,8 @@ class Acceso : AppCompatActivity() {
     private lateinit var pass:String
     private var usuario:Usuario? = null
 
+    private lateinit var validarCampos:HashMap<Boolean, Int>
+
 
 
 
@@ -33,11 +38,14 @@ class Acceso : AppCompatActivity() {
 
         supportActionBar!!.hide()
 
-        txtID.setText("admin@infotasks.com")
-        txtPass.setText("administrador")
+        txtID.setText("user1@infotasks.com")
+        txtPass.setText("usuario1")
+
+        //txtID.setText("admin@infotasks.com")
+        //txtPass.setText("administrador")
 
         btnAcceder.setOnClickListener {
-            if (!camposVacios()) {
+            if (obtenerCampos()) {
                 runBlocking {
                     val job: Job = launch(context = Dispatchers.Default) {
                         credencialesCorrectas = FB.autenticar(mail, pass)
@@ -75,7 +83,7 @@ class Acceso : AppCompatActivity() {
     }
 
     private fun lanzarVentanaTecnico() {
-        val intentTec= Intent(this, Usuario::class.java)
+        val intentTec= Intent(this, Tecnico::class.java)
         intentTec.putExtra("tecnico", usuario)
         startActivity(intentTec)
     }
@@ -86,10 +94,40 @@ class Acceso : AppCompatActivity() {
         startActivity(intentAdmin)
     }
 
-    private fun camposVacios(): Boolean {
+    private fun obtenerCampos(): Boolean {
+        validarCampos= hashMapOf(true to 0, false to 0)
+        validarCampos[validarMail()]=+1
+        validarCampos[validarContraseña()]=+1
+
+        return validarCampos[false]==0
+    }
+    private fun validarMail():Boolean {
         mail=txtID.text.toString().trim()
+        return if (mail.isEmpty()) {
+            mostrarError(txtErrorMailAcceso)
+            false
+        }else {
+            ocultarError(txtErrorMailAcceso)
+            true
+        }
+    }
+    private fun validarContraseña():Boolean {
         pass=txtPass.text.toString().trim()
-        return (mail.isEmpty() || pass.isEmpty())
+        return if(pass.isEmpty()) {
+            mostrarError(txtErrorPassAcceso)
+            false
+        } else {
+            ocultarError(txtErrorPassAcceso)
+            true
+        }
+    }
+
+    private fun mostrarError(textView: TextView){
+        textView.visibility = View.VISIBLE
+    }
+
+    private fun ocultarError(textView: TextView){
+        textView.visibility = View.INVISIBLE
     }
 }
 

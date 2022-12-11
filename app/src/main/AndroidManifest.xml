@@ -11,35 +11,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InfoTasks">
         <activity
-            android:name=".ListaUsuarios"
+            android:name=".Tecnico"
+            android:exported="false" />
+        <activity
+            android:name=".VistaModelos.UsuarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListasModelos.ListaUsuarios"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".ListaClientesTarea"
+            android:name=".ListasModelos.ListaClientesTarea"
             android:exported="false" />
         <activity
-            android:name=".CrearUsuario"
+            android:name=".CrearEditarModelos.CrearUsuario"
             android:exported="false" />
         <activity
-            android:name=".ClienteActivity"
+            android:name=".VistaModelos.ClienteActivity"
             android:exported="false" />
         <activity
-            android:name=".ListaClientes"
+            android:name=".ListasModelos.ListaClientes"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".CrearCliente"
+            android:name=".CrearEditarModelos.CrearCliente"
             android:exported="false" />
         <activity
-            android:name=".CrearTarea"
+            android:name=".CrearEditarModelos.CrearTarea"
             android:exported="false"
-            android:noHistory="false">
-        </activity>
+            android:noHistory="false" />
         <activity
-            android:name=".TareaActivity"
+            android:name=".VistaModelos.TareaActivity"
             android:exported="false" />
         <activity
-            android:name=".ListaTareas"
+            android:name=".ListasModelos.ListaTareas"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity

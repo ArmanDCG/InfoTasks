@@ -1,10 +1,9 @@
-package com.example.infotasks
+package com.example.infotasks.ListasModelos
 
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Adaptadores.AdaptadorClientes
+import com.example.infotasks.CrearEditarModelos.CrearCliente
 import com.example.infotasks.Modelo.Cliente
+import com.example.infotasks.R
 import kotlinx.android.synthetic.main.activity_lista_clientes.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -41,7 +42,7 @@ class ListaClientes : Fragment()   {
         contexto=this.requireActivity()
 
         btnAddCliente.setOnClickListener {
-            val intentAddCliente= Intent(contexto,CrearCliente::class.java )
+            val intentAddCliente= Intent(contexto, CrearCliente::class.java )
                 .putExtra("accion", "crear")
             startActivity(intentAddCliente)
         }

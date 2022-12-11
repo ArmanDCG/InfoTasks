@@ -21,9 +21,6 @@ import java.lang.Exception
 object FB {
     private val auth = FirebaseAuth.getInstance()
     private val db = Firebase.firestore
-    //private val storage = Firebase.storage.reference
-
-
 
     //--Acceso---------------------------------------------------------------
     suspend fun autenticar(mail:String, pass:String):Boolean {
@@ -277,6 +274,10 @@ object FB {
         }
 
         }
+
+    private suspend fun borrarCuenta(){
+
+    }
 }
 
 

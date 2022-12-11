@@ -1,4 +1,4 @@
-package com.example.infotasks
+package com.example.infotasks.CrearEditarModelos
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -6,19 +6,19 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
 import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Constantes.PrioridadTarea
 import com.example.infotasks.Constantes.TipoTarea
+import com.example.infotasks.ListasModelos.ListaClientesTarea
 import com.example.infotasks.Modelo.Cliente
 import com.example.infotasks.Modelo.Tarea
+import com.example.infotasks.R
 import com.example.infotasks.Utiles.FechaHora
 import com.example.infotasks.Utiles.Funcionales.toast
 import kotlinx.android.synthetic.main.activity_crear_tarea.*
@@ -57,18 +57,18 @@ class CrearTarea : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_tarea)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.title="Crear"
 
         listaTiposTarea = arrayListOf(TipoTarea.INCIDENCIA, TipoTarea.INSTALACION)
         listaPrioridadesTarea = arrayListOf(PrioridadTarea.BAJA, PrioridadTarea.MEDIA, PrioridadTarea.ALTA)
         posPrioridad=0
         posTipo=0
 
-        validacionCampos= hashMapOf(true to 0, false to 0)
-
         accion=intent.getStringExtra("accion") as String
 
 
-        spinnerTipo.adapter=ArrayAdapter(this, R.layout.spinner_item,R.id.txtItem, listaTiposTarea)
+        spinnerTipo.adapter=ArrayAdapter(this, R.layout.spinner_item, R.id.txtItem, listaTiposTarea)
         spinnerTipo.onItemSelectedListener= object :AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
@@ -80,7 +80,9 @@ class CrearTarea : AppCompatActivity() {
             }
 
         }
-        spinnerPrioridad.adapter=ArrayAdapter(this, R.layout.spinner_item,R.id.txtItem, listaPrioridadesTarea )
+        spinnerPrioridad.adapter=ArrayAdapter(this,
+            R.layout.spinner_item,
+            R.id.txtItem, listaPrioridadesTarea )
         spinnerPrioridad.onItemSelectedListener= object :AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 posPrioridad=position
@@ -171,6 +173,7 @@ class CrearTarea : AppCompatActivity() {
 
     private fun comprobarAccion() {
         if (accion=="editar") {
+            supportActionBar!!.title="Editar"
             tareaEditar = intent.getSerializableExtra("tarea") as Tarea
             cliente = intent.getSerializableExtra("cliente") as Cliente
 
@@ -206,6 +209,7 @@ class CrearTarea : AppCompatActivity() {
     }
 
     private fun obtenerDatos(): Boolean {
+        validacionCampos= hashMapOf(true to 0, false to 0)
         validacionCampos[validarDescripcion()]=+1
         validacionCampos[validarCliente()]=+1
         tipo=listaTiposTarea[posTipo]

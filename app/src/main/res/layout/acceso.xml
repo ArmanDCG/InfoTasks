@@ -14,17 +14,36 @@
         android:id="@+id/txtID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Identificador"
-        android:inputType="textPersonName" />
+        android:ems="12"
+        android:hint="Mail"
+        android:inputType="textPersonName"
+        android:background="@drawable/border_input_text" />
+
+    <TextView
+        style="@style/textoError"
+        android:id="@+id/txtErrorMailAcceso"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="45dp"
+        android:layout_marginBottom="20dp"
+        android:text="error" />
 
     <EditText
         android:id="@+id/txtPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:ems="12"
         android:hint="Contraseña"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:background="@drawable/border_input_text"/>
+    <TextView
+        style="@style/textoError"
+        android:id="@+id/txtErrorPassAcceso"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="45dp"
+        android:layout_marginBottom="20dp"
+        android:text="error" />
 
     <Button
         android:id="@+id/btnAcceder"

@@ -15,9 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.infotask.ConexionBD.FB
 import com.example.infotasks.Constantes.EstadoTarea
 import com.example.infotasks.Constantes.PrioridadTarea
+import com.example.infotasks.Constantes.RolUsuario
 import com.example.infotasks.Modelo.Tarea
 import com.example.infotasks.R
-import com.example.infotasks.TareaActivity
+import com.example.infotasks.VistaModelos.TareaActivity
 import com.example.infotasks.Utiles.FechaHora.dateToString
 import com.example.infotasks.Utiles.Funcionales.toast
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +27,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
-class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : RecyclerView.Adapter<AdaptadorTareas.ViewHolder>() {
+class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>, var rol:RolUsuario) : RecyclerView.Adapter<AdaptadorTareas.ViewHolder>() {
 
     override fun getItemCount(): Int{
         return this.tareas.size!!
@@ -41,7 +42,7 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val tarea = this.tareas[position]
-        holder.bind( tarea,tareas, contexto, position,this)
+        holder.bind( tarea,tareas,rol, contexto, position,this)
     }
 
     class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
@@ -53,7 +54,7 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
 
         @RequiresApi(Build.VERSION_CODES.O)
         @SuppressLint("ResourceAsColor", "NotifyDataSetChanged")
-        fun bind( tarea:Tarea, listaTareas:ArrayList<Tarea>, contexto: Context, pos:Int, AdaptadorTareas: AdaptadorTareas){
+        fun bind( tarea:Tarea, listaTareas:ArrayList<Tarea>,rol:RolUsuario,  contexto: Context, pos:Int, AdaptadorTareas: AdaptadorTareas){
 
             insertarImagenPrioridad(tarea.prioridad!!)
             txtCardTipo.text = tarea.tipo.toString()
@@ -65,30 +66,33 @@ class AdaptadorTareas(var contexto:Context, var tareas:ArrayList<Tarea>) : Recyc
             itemView.setOnClickListener {
                 val intentTarea=Intent(contexto, TareaActivity::class.java)
                     .putExtra("tarea", tarea)
+                    .putExtra("rol", rol)
 
                 contexto.startActivity(intentTarea)
             }
 
             itemView.setOnLongClickListener {
-                val dialog= AlertDialog.Builder(contexto)
-                    .setMessage("¿Deseas borrar la Tarea?")
-                    .setCancelable(false)
-                    .setTitle("Borrar Tarea")
-                    .setPositiveButton("Aceptar"){_,_ ->
-                        var borrado=false
-                        runBlocking {
-                            val job: Job = launch(context = Dispatchers.Default) {
-                                borrado= FB.borrarTarea(tarea.id!!)
+                if (rol==RolUsuario.ADMINISTRADOR) {
+                    val dialog = AlertDialog.Builder(contexto)
+                        .setMessage("¿Deseas borrar la Tarea?")
+                        .setCancelable(false)
+                        .setTitle("Borrar Tarea")
+                        .setPositiveButton("Aceptar") { _, _ ->
+                            var borrado = false
+                            runBlocking {
+                                val job: Job = launch(context = Dispatchers.Default) {
+                                    borrado = FB.borrarTarea(tarea.id!!)
+                                }
+                                job.join()
                             }
-                            job.join()
-                        }
-                        if (borrado){
-                            listaTareas.remove(tarea)
-                            AdaptadorTareas.notifyDataSetChanged()
-                            toast(contexto, "Tarea borrada correctamente")
-                        }
-                    }.setNegativeButton("Cancelar"){_,_->}
-                    .create().show()
+                            if (borrado) {
+                                listaTareas.remove(tarea)
+                                AdaptadorTareas.notifyDataSetChanged()
+                                toast(contexto, "Tarea borrada correctamente")
+                            }
+                        }.setNegativeButton("Cancelar") { _, _ -> }
+                        .create().show()
+                }
 
                 return@setOnLongClickListener true
             }
